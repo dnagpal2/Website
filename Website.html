@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Click on skills to show how i used it and what it did  Yash V ideas-->
+<!-- Add recommentdations section -->
+<!-- Add skill icons to experinces so when user clicks on skill icon in experinces, info will show for how skill was used - Sneha Idea  -->
+<!-- Make experience info more personal, do not use resume points. Add skills below date but above memoir  - Sneha Idea  -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devraj Nagpal - Software Engineer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a192f;
+            --secondary: #64ffda;
+            --navy-light: #112240;
+            --slate: #8892b0;
+            --light-slate: #ccd6f6;
+            --white: #e6f1ff;
+            --font-mono: 'SF Mono', 'Fira Code', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary);
+            color: var(--slate);
+            line-height: 1.6;
+        }
+
+        .header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 150px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(10, 25, 47, 0.7), rgba(10, 25, 47, 0.9));
+            background-size: cover;
+            z-index: -1;
+        }
+
+        .header-content {
+            max-width: 1000px;
+        }
+
+        .mono-text {
+            font-family: var(--font-mono);
+            color: var(--secondary);
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 80px;
+            color: var(--light-slate);
+            margin: 20px 0;
+            line-height: 1.1;
+        }
+
+        .header h2 {
+            font-size: 60px;
+            color: var(--slate);
+            margin-bottom: 30px;
+        }
+
+        .header p {
+            font-size: 20px;
+            max-width: 540px;
+            margin-bottom: 50px;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 50px;
+            background: rgba(10, 25, 47, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav.scrolled {
+            padding: 15px 50px;
+            box-shadow: 0 10px 30px -10px rgba(2, 12, 27, 0.7);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--light-slate);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 10px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .section {
+            padding: 100px 150px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            font-size: 32px;
+            color: var(--light-slate);
+            margin-bottom: 40px;
+        }
+
+        .section-title::before {
+            content: "";
+            margin-right: 10px;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .experience-card {
+            background: var(--navy-light);
+            padding: 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 0;
+            background-color: var(--secondary);
+            transition: height 0.25s ease;
+        }
+
+        .experience-card:hover::before {
+            height: 100%;
+        }
+
+        .experience-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -15px rgba(2, 12, 27, 0.7);
+        }
+
+        .experience-card h3 {
+            color: var(--light-slate);
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        .experience-card p {
+            color: var(--secondary);
+            font-family: var(--font-mono);
+            font-size: 13px;
+        }
+
+        .company-logo {
+            width: 80px;
+
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-item {
+            background: var(--navy-light);
+            padding: 20px;
+            border-radius: 4px;
+            text-align: center;
+            transition: transform 0.3s, background-color 0.3s;
+            cursor: pointer;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+            background-color: rgba(100, 255, 218, 0.1);
+        }
+
+        .skill-icon {
+            font-size: 24px;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 25, 47, 0.95);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: var(--navy-light);
+            margin: 50px auto;
+            padding: 40px;
+            border-radius: 4px;
+            max-width: 800px;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .modal-content h3 {
+            color: var(--light-slate);
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .modal-content ul {
+            list-style: none;
+        }
+
+        .modal-content li {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .modal-content li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            color: var(--light-slate);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--secondary);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .project-card {
+            background: var(--navy-light);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-info {
+            padding: 25px;
+        }
+
+        .project-info h3 {
+            color: var(--light-slate);
+            margin-bottom: 10px;
+        }
+
+        .project-info a {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--secondary);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-size: 14px;
+        }
+
+        .project-info a:hover {
+            text-decoration: underline;
+        }
+
+        .contact {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact p {
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            margin: 30px 0;
+        }
+
+        .social-links a {
+            font-size: 24px;
+            margin: 0 15px;
+            color: var(--light-slate);
+            transition: color 0.3s, transform 0.3s;
+            display: inline-block;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .contact-form {
+            background: var(--navy-light);
+            padding: 30px;
+            border-radius: 4px;
+            margin-top: 30px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            background: var(--primary);
+            border: 1px solid var(--slate);
+            border-radius: 4px;
+            color: var(--light-slate);
+            font-family: var(--font-mono);
+        }
+
+        .contact-form button {
+            background: transparent;
+            color: var(--secondary);
+            border: 1px solid var(--secondary);
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .contact-form button:hover {
+            background: rgba(100, 255, 218, 0.1);
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 0 50px;
+            }
+
+            .section {
+                padding: 80px 50px;
+            }
+
+            .header h1 {
+                font-size: 40px;
+            }
+
+            .header h2 {
+                font-size: 30px;
+            }
+        }
+
+        #intro::after {
+            content: "|";
+            font-weight: bold;
+            opacity: 1;
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+
+        .titles {
+            margin-top: 10px;
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            /* color: #8892b0; */
+            color: var(--secondary);
+            border-bottom: 1px solid var(--primary-color);
+            display: inline-block;
+            padding-bottom: 0.5rem;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards 1s;
+        }
+
+
+        .typing-line {
+            font-size: 20px;
+            border-right: 2px solid var(--cursor-color);
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            opacity: 0;
+            display: block;
+        }
+
+        .line1 {
+            width: fit-content;
+            animation:
+                typing1 2s steps(40, end) 1.5s forwards,
+                removeCursor 0.1s 3.5s forwards;
+        }
+
+        .line2 {
+            width: fit-content;
+            animation:
+                typing2 2s steps(40, end) 3.5s forwards,
+                removeCursor 0.1s 5.5s forwards;
+        }
+
+        .line3 {
+            width: fit-content;
+            animation:
+                typing3 2s steps(40, end) 5.5s forwards,
+                removeCursor 0.1s 7.5s forwards;
+        }
+
+        @keyframes typing1 {
+            0% {
+                width: 0;
+                opacity: 1;
+            }
+
+            100% {
+                width: 650px;
+                opacity: 1;
+            }
+        }
+
+        @keyframes typing2 {
+            0% {
+                width: 0;
+                opacity: 1;
+            }
+
+            100% {
+                width: 650px;
+                opacity: 1;
+            }
+        }
+
+        @keyframes typing3 {
+            0% {
+                width: 0;
+                opacity: 1;
+            }
+
+            100% {
+                width: 650px;
+                opacity: 1;
+            }
+        }
+
+        @keyframes removeCursor {
+            to {
+                border-right-color: transparent;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .reachOut {
+            font-family: var(--font-mono);
+            color: var(--secondary);
+        }
+
+        .recommendations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .recommendation-card {
+            background: var(--navy-light);
+            padding: 30px;
+            border-radius: 70px;
+            box-shadow: #64ffda;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .recommendation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -15px rgba(2, 12, 27, 0.7);
+        }
+
+        .recommender-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .recommender-details h3 {
+            color: var(--light-slate);
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .recommender-details p {
+            color: var(--slate);
+            font-size: 14px;
+            font-family: var(--font-mono);
+        }
+
+        .recommendation-content {
+            position: relative;
+            padding-top: 20px;
+        }
+
+        .quote-icon {
+            color: var(--secondary);
+            font-size: 24px;
+            opacity: 0.6;
+            margin-bottom: 10px;
+        }
+
+        .recommendation-content p {
+            color: var(--light-slate);
+            font-size: 16px;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .recommendations-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .recommendation-card {
+                padding: 20px;
+            }
+        }
+    </style>>
+
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-content">
+            <p class="mono-text">Hi, my name is</p>
+            <h1>Devraj Nagpal</h1>
+            <h3 class="titles">Software Engineer | Data Engineer | Full Stack Engineer</h3>
+            <div>
+                <span class="typing-line line1">I'm a software engineer with a focus on developing intelligent,</span>
+                <span class="typing-line line2">AI-driven applications. I specialize in enhancing user
+                    engagement,</span>
+                <span class="typing-line line3">optimizing data processing, and building scalable systems.</span>
+            </div>
+        </div>
+    </header>
+    <nav class="nav">
+        <ul class="nav-links">
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#recommendations">Recommendations</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="experience-grid">
+                <div class="experience-card" onclick="openModal('bitlearns')">
+                    <img src="images/bitlearns_logo.png" alt="Bitlearns Logo" class="company-logo">
+                    <h3>Bitlearns</h3>
+                    <p>Full Stack Engineer</p>
+                    <p>July 2024 - November 2024</p>
+                </div>
+                <div class="experience-card" onclick="openModal('meshAi')">
+                    <img src="images/meshAI_logo.png" alt="Mesh AI Logo" class="company-logo">
+                    <h3>Mesh AI</h3>
+                    <p>Data Engineer</p>
+                    <p>August 2024 - November 2024</p>
+                </div>
+                <div class="experience-card" onclick="openModal('preeminentTech')">
+                    <img src="images/preeminentTech.png" alt="Preeminent Technology Logo" class="company-logo">
+                    <h3>Preeminent Technology Inc</h3>
+                    <p>Backend Engineer</p>
+                    <p>August 2024 - October 2024</p>
+                </div>
+                <div class="experience-card" onclick="openModal('rapyd')">
+                    <img src="images/rapydLinx.png" alt="RAPYD LinX Logo" class="company-logo">
+                    <h3>RAPYD LinX</h3>
+                    <p>Software Engineer</p>
+                    <p>May 2024 - August 2024</p>
+                </div>
+                <div class="experience-card" onclick="openModal('rocscience')">
+                    <img src="images/rocscience.png" alt="Rocscience Logo" class="company-logo">
+                    <h3>Rocscience</h3>
+                    <p>Software QA Developer</p>
+                    <p>May 2023 - August 2023</p>
+                </div>
+                <div class="experience-card" onclick="openModal('weBots')">
+                    <img src="images/weBots.png" alt="Western WE-BOTS Logo" class="company-logo">
+                    <h3>Western WE-BOTS</h3>
+                    <p>Firmware Engineer</p>
+                    <p>November 2022 - January 2024</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Modal templates -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-item" onclick="openSkillModal('Python')">
+                    <i class="fab fa-python skill-icon"></i>
+                    <p>Python</p>
+                </div>
+                <div class="skill-item" onclick="openSkillModal('JavaScript')">
+                    <i class="fab fa-js skill-icon"></i>
+                    <p>JavaScript</p>
+                </div>
+                <div class="skill-item" onclick="openSkillModal('TypeScript')">
+                    <i class="fas fa-code skill-icon"></i>
+                    <p>TypeScript</p>
+                </div>
+                <div class="skill-item" onclick="openSkillModal('React.js')">
+                    <i class="fab fa-react skill-icon"></i>
+                    <p>React.js</p>
+                </div>
+                <div class="skill-item" onclick="openSkillModal('Java')">
+                    <i class="fab fa-java skill-icon"></i>
+                    <p>Java</p>
+                </div>
+                <div class="skill-item" onclick="openSkillModal('SQL')">
+                    <i class="fas fa-database skill-icon"></i>
+                    <p>SQL</p>
+                </div>
+                <div class="skill-item" onclick="openSkillModal('Git')">
+                    <i class="fab fa-git-alt skill-icon"></i>
+                    <p>Git</p>
+                </div>
+                <div class="skill-item" onclick="openSkillModal('LLM Models')">
+                    <i class="fas fa-brain skill-icon"></i>
+                    <p>LLM Models</p>
+                </div>
+                <div class="skill-item" onclick="openSkillModal('TensorFlow')">
+                    <i class="fas fa-cogs skill-icon"></i>
+                    <p>TensorFlow</p>
+                </div>
+                <div class="skill-item" onclick="openSkillModal('PyTorch')">
+                    <i class="fas fa-robot skill-icon"></i>
+                    <p>PyTorch</p>
+                </div>
+                <div class="skill-item" onclick="openSkillModal('LangChain')">
+                    <i class="fas fa-link skill-icon"></i>
+                    <p>LangChain</p>
+                </div>
+                <div class="skill-item" onclick="openSkillModal('RAG')">
+                    <i class="fas fa-share-alt skill-icon"></i>
+                    <p>RAG</p>
+                </div>
+                <div class="skill-item" onclick="openSkillModal('AWS')">
+                    <i class="fas fa-cloud skill-icon"></i>
+                    <p>AWS</p>
+                </div>
+                <div class="skill-item" onclick="openSkillModal('Node.js')">
+                    <i class="fas fa-server skill-icon"></i>
+                    <p>Node.js</p>
+                </div>
+                <div class="skill-item" onclick="openSkillModal('PostgreSQL')">
+                    <i class="fas fa-database skill-icon"></i>
+                    <p>PostgreSQL</p>
+                </div>
+                <div class="skill-item" onclick="openSkillModal('Api')">
+                    <i class="fas fa-lock skill-icon"></i>
+                    <p>API Security</p>
+                </div>
+                <div class="skill-item" onclick="openSkillModal('Socket.io')">
+                    <i class="fas fa-bolt skill-icon"></i>
+                    <p>Socket.io</p>
+                </div>
+                <div class="skill-item" onclick="openSkillModal('Data')">
+                    <i class="fas fa-chart-line skill-icon"></i>
+                    <p>Data Analysis</p>
+                </div>
+                <div class="skill-item" onclick="openSkillModal('FastAPI')">
+                    <i class="fas fa-mobile-alt skill-icon"></i>
+                    <p>FastAPI</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="images/ai_chatbot.png" alt="AI Chatbot Project" class="project-image">
+                    <div class="project-info">
+                        <h3>AI Chatbot</h3>
+                        <p>Interactive chatbot using LLMs, Node.js, and Streamlit</p>
+                        <a href="https://chat-bot-dnagpal.streamlit.app/" target="_blank">View Project</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="images/path_finder.png" alt="Path Finder Project" class="project-image">
+                    <div class="project-info">
+                        <h3>Path Finder & Maze Generator</h3>
+                        <p>Interactive pathfinding visualization tool</p>
+                        <a href="https://dnagpal2.github.io/Path-Finder--Maze-Generator/" target="_blank">View
+                            Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id="skill-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeSkillModal()">&times;</span>
+            <div id="skillContent"></div>
+        </div>
+    </div>
+    <section id="recommendations" class="section">
+        <div class="container">
+            <h2 class="section-title">Recommendations</h2>
+            <div class="recommendations-grid">
+                <div class="recommendation-card">
+                    <div class="recommender-info">
+                        <div class="recommender-details">
+                            <h3>Joaquin Berrios</h3>
+                            <p>Full Stack Developer @ MeshAI</p>
+                        </div>
+                    </div>
+                    <div class="recommendation-content">
+                        <i class="fas fa-quote-left quote-icon"></i>
+                        <p>"It was a pleasure working with Devraj on the same team. His knowledge and skills were of
+                            great value during the development of an LLM Analytics Agent Tool in Python, utilizing the
+                            Langchain library. He consistently proposed solutions to challenges and sought ways to
+                            improve the product. During and outside of meetings Devraj always had great communication
+                            with everyone. A great addition to the team."</p>
+                    </div>
+                </div>
+
+                <div class="recommendation-card">
+                    <div class="recommender-info">
+                        <div class="recommender-details">
+                            <h3>Eduardo Benetti</h3>
+                            <p>Co-Founder @ Bitlearns</p>
+                        </div>
+                    </div>
+                    <div class="recommendation-content">
+                        <i class="fas fa-quote-left quote-icon"></i>
+                        <p>"I had the pleasure of working with Devraj, who has been a crucial contributor to the
+                            development of Bitlearns as a full stack software engineer. Devraj's versatility has allowed
+                            him to excel in several areas of the product, playing a significant role in its progress.
+                            What stands out the most about him is his relentless eagerness to learn. He's always up for
+                            new challenges and constantly seeking opportunities to expand his technical knowledge. His
+                            openness to learning and his willingness to tackle new tasks head-on make him an exceptional
+                            asset. Devraj is not only technically strong but also collaborative, making him a great fit
+                            for any team environment. I have no doubt he would be a valuable resource for any company
+                            looking for someone passionate about tech development and eager to grow. Please feel free to
+                            reach out if you'd like more information."
+                        </p>
+                    </div>
+                </div>
+                <div class="recommendation-card">
+                    <div class="recommender-info">
+                        <div class="recommender-details">
+                            <h3>Ethan Heming</h3>
+                            <p>CTO/Software Developer @ Mesh AI</p>
+                        </div>
+                    </div>
+                    <div class="recommendation-content">
+                        <i class="fas fa-quote-left quote-icon"></i>
+                        <p>"Devraj worked well with a small team to identify a feasible LLM strategy to tackle
+                            complex customer queries and use them to build complex Postgres statements. He communicated
+                            ideas easily and brought workable hypotheses to the table. With the others on his team, he
+                            built python scripts to access and leverage several services and libraries that enabled the
+                            project to succeed."</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="section contact">
+        <div class="container">
+            <h2 class="section-title">Contact Me</h2>
+
+            <div class="contact-form">
+                <h3 class="reachOut">Reach Out!</h3>
+                <form id="contactForm" action="mailto:devraj.nagpal@gmail.com" method="post" enctype="text/plain"
+                    onsubmit="clearForm()">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+            <div class="social-links">
+                <a href="https://linkedin.com/in/devrajnagpal" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/dnagpal2" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="mailto:devraj.nagpal@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+            <!-- <p>Email: devraj.nagpal@gmail.com</p> -->
+            <p>Based in - Toronto, ON</p>
+            <p>Developed by Devraj Nagpal <i class="fa-regular fa-copyright"></i></p>
+
+        </div>
+    </section>
+
+    <script>
+        // Experience data
+        //Add a skill and skill icon, adjust it so it can have multiple skills and skillicons, 
+        //Make an array where it is called so it will go through all of it 
+        const experiences = {
+            bitlearns: {
+                title: "Bitlearns",
+                role: "Full Stack Engineer",
+                period: "July 2024 - November 2024",
+                details: [
+                    "In July 2024, I embarked on a pioneering project to harmonize AI with the latest technologies, including Node.js, APIs, PostgreSQL, AWS, and TypeScript. I crafted responsive UI interfaces with React, meticulously optimizing DOM manipulation to ensure seamless user interactions. Additionally, I implemented real- time user feedback mechanisms, effortlessly keeping users informed throughout their experience. On the AI front, I created sophisticated models using Python, TensorFlow, and PostgreSQL to provide personalized feedback, generate multi- modal content, and autonomously generate passwords. Furthermore, I leveraged Socket.io and APIs to deliver real-time notifications to teachers whenever students signed up, allowing for effortless tracking and management.The culmination of these efforts resulted in a remarkable 34 % increase in user experience and engagement, subsequently enhancing the overall value proposition. I'm grateful to have been part of the team"
+                ]
+            },
+            meshAi: {
+                title: "Mesh AI",
+                role: "Data Engineer",
+                period: "August 2024 - November 2024",
+                details: [
+                    "In August 2024, I developed a scheduling query system that leveraged advanced algorithms and AI frameworks to analyze database queries and enhance processing efficiency and accuracy. This system, built using Python, AWS Lambda, EC2, FastAPI, LangChain, AI, and PostgreSQL, brought about a slew of impressive achievements. I developed SQL query generation mechanisms using Seq2SQL and Text-to-SQL models, increasing data retrieval accuracy by 30%. Utilizing LangChain for natural language processing and Llama-Index for data indexing, I simplified user data retrieval and ensured accurate responses. Additionally, I designed a robust SQL query validation module and an improved read-only SQL agent for multi-table querying and safe data processing. The result was a system that allowed a unqiue way for users to interact with databases, and I'm proud to have played a part in its development."
+                ]
+            },
+            preeminentTech: {
+                title: "Preeminent Technology Inc",
+                role: "Backend Engineer",
+                period: "August 2024 – October 2024",
+                details: [
+                    "In August 2024, I had the privilege of architecting scalable backend systems using .Net 8, C, Azure, and Node.js, enabled AI-driven automation for flight and hotel bookings. The thrill of engineering RESTful APIs with advanced query management, seamlessly integrating with Enterprise APIs, still resonates with me. And, of course, the moment when automated AI/LLM training with CSP, Genetic Algorithms, and MILP successfully improved accuracy by 45%! I helped develop and integrate Viator API endpoints, crafting a backend architecture that handled data with precision. I'm grateful for the experience."
+                ]
+            },
+            rapyd: {
+                title: "RAPYD LinX",
+                role: "Software Engineer",
+                period: "May 2024 - August 2024",
+                details: [
+                    "In May 2024, I revolutionized data management and decision-making through innovative solutions. I developed complex SQL queries to generate reports for the sales team, enhancing decision-making and strategic planning efficiency by 40%. I also streamlined client data organization by 90% through a user-friendly JavaFX interface, empowering swift and accurate data retrieval, update, and management. Furthermore, I automated the end-to-end sales processing workflow using Python and Playwright, increasing productivity by 5x and reducing processing times from 5 minutes to just 1 minute. Through these achievements, I have to thank the RAPYD Linx teams for the experience."
+                ]
+            },
+            rocscience: {
+                title: "Rocscience",
+                role: "Software QA Developer",
+                period: "May 2023 - August 2023",
+                details: [
+                    "In May 2023, I spearheaded the development of a Python-based organizational algorithm that transformed the diagnostic logging process for geotechnical designs. This innovation streamlined line count consistency across diverse formats, reducing batch engine unit testing time from days to mere hours. My efforts led to a 60% boost in diagnostic data accuracy by addressing issues like missing information and extraneous headers, enhancing the quality and reliability of the logs. Additionally, I implemented an automated verification and comparison tool that enabled rapid, precise analysis across various application builds, accelerating testing efficiency by 80% and significantly enhancing our data validation processes."
+                ]
+            },
+
+            weBots: {
+                title: "Western WE-BOTS",
+                role: "Firmware Engineer",
+                period: "November 2022 - January 2024",
+                details: [
+                    "In this project, I restructured the telemetry architecture, integrating a CAN bus communication system with ROS to enable seamless data exchange between Arduino and ESP32 microcontrollers. I developed firmware in C++ for the ICM20948 sensor to capture accurate acceleration and rotation data on the life-size robot. To enhance operational insight, I created a 3D visual display that dynamically illustrates the robot’s acceleration and direction. Additionally, I designed and implemented a Python-based telemetry system using MQTT, enabling real-time remote monitoring and control. This setup significantly improved performance, delivering reliable, on-demand status updates and control capabilities."
+                ]
+            }
+        };
+
+        // Modal functionality
+        //Fix this for skills and skill icons
+        function openModal(company) {
+            const modal = document.getElementById('modal');
+            const modalContent = document.getElementById('modalContent');
+            const experience = experiences[company];
+
+            modalContent.innerHTML = `
+        <h3>${experience.title}</h3>
+        <div class="company-details">
+            <p>${experience.role}</p>
+            <p>${experience.period}</p>
+        </div>
+        <ul>
+            ${experience.details.map(detail => `<li>${detail}</li>`).join('')}
+        </ul>
+    `;
+
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        window.onclick = function (event) {
+            const modal = document.getElementById('modal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        document.querySelectorAll('.experience-card, .skill-item, .project-card').forEach((el) => {
+            el.style.opacity = 0;
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+        //Skills
+        const skillsData = {
+            Python: [
+                "Developed AI models at Bitlearns using TensorFlow for personalized feedback and multi-modal content generation, which led to a 34% boost in user engagement by dynamically adjusting content to user performance.",
+                "Implemented diagnostic algorithms at Rocscience to automate testing for geotechnical data, reducing batch testing from days to hours and increasing diagnostic accuracy by 60%.",
+                "Engineered a SQL query generation system at Mesh AI using Seq2SQL and NLP techniques, automating natural language query transformations to SQL. This innovation improved data retrieval accuracy by 30% and made data more accessible to non-technical users."
+            ],
+            JavaScript: [
+                "Developed a highly interactive UI for Bitlearns with React, focusing on responsive design and optimized DOM manipulation, leading to improved user engagement and smooth navigation through learning modules.",
+                "Designed an integrated interface for RAPYD LinX using JavaScript and JavaFX, enabling real-time interactions with sales data. This streamlined data entry and improved client interaction efficiency, boosting data organization by 90%."
+            ],
+            TypeScript: [
+                "Enhanced project maintainability at Bitlearns by integrating TypeScript, adding type safety to Node.js and frontend codebases. This reduced runtime errors by 20% and improved team productivity with more predictable and bug-free code.",
+                "Used TypeScript in AI Chatbot project to build a robust, scalable backend and frontend, facilitating real-time query handling with strict type checks. Improved system reliability and reduced debug time, enabling faster, smoother feature deployment."
+            ],
+            "React.js": [
+                "Built user-friendly interfaces at Bitlearns using React, implementing dynamic loading and efficient state management, which ensured smooth transitions across components and enhanced user experience across devices."
+            ],
+            SQL: [
+                "Crafted advanced SQL queries at RAPYD LinX, improving data-driven decision-making efficiency by 40% and enabling the sales team to quickly access real-time insights.",
+                "Implemented a custom SQL query system at Mesh AI, integrating PostgreSQL with AI-driven query generation models like Seq2SQL to convert natural language inputs into accurate SQL queries. Enhanced data retrieval capabilities led to more intuitive user access, improving query precision and response time.",
+                "Designed complex multi-table SQL queries at Mesh AI, incorporating query validation layers to enhance security and prevent data mishandling. These structured queries supported data indexing and optimized database interactions, delivering a 30% improvement in query efficiency."
+            ],
+            "Node.js": [
+                "Developed scalable backends with Node.js at Bitlearns, integrating AI models to dynamically personalize user experiences. Enhanced server-side API performance for rapid data processing, ensuring low latency and high scalability.",
+                "Architected backend services at Preeminent Technology, leveraging Node.js for real-time data handling in AI-enhanced flight and hotel booking systems, with a focus on efficient pipeline orchestration and seamless integration with external booking APIs."
+            ],
+            "AWS": [
+                "Designed a scalable scheduling query system at Mesh AI with AWS Lambda, EC2, and FastAPI, leveraging cloud resources to handle large-scale data processing demands while balancing loads. This setup ensured processing efficiency, reduced latency, and cut operational costs by dynamically adjusting resources based on demand.",
+                "Integrated AWS Lambda and EC2 for Bitlearns, managing server capacity in real time to meet fluctuating user demands and minimize downtime. This setup reduced response times during peak hours, creating a robust infrastructure capable of supporting thousands of concurrent users.",
+                "Utilized AWS S3 and RDS for secure data storage at Bitlearns, implementing redundancy and automated backup solutions. Integrated AWS IAM for robust role-based access control, protecting sensitive data while allowing quick, reliable data access across applications."
+            ],
+            Git: [
+                "Utilized Git for version control, managing branches, pull requests, and code reviews across all projects. Ensured smooth collaboration and code stability by maintaining an organized workflow and preventing conflicts through regular merge practices."
+            ],
+            "LLM Models": [
+                "Implemented LLMs to power conversational flows for an interactive chatbot, allowing context-aware and precise response handling. Enabled users to interact with real-time data queries, enhancing conversational depth and user satisfaction."
+            ],
+            Java: [
+                "Employed Java in RAPYD LinX to create intuitive JavaFX interfaces, improving client data interactions and achieving a 90% enhancement in data organization. Built secure backend logic for efficient data handling and user-friendly updates."
+            ],
+            TensorFlow: [
+                "Used TensorFlow at Bitlearns to design adaptive learning models, delivering personalized educational content. This approach resulted in a significant boost in user retention and satisfaction by adjusting content based on user interactions."
+            ],
+            PyTorch: [
+                "Built NLP models in PyTorch for chatbot development, ensuring real-time accuracy and contextually relevant responses. Integrated model-switching techniques to adapt conversations dynamically, boosting response accuracy and user satisfaction."
+            ],
+            LangChain: [
+                "Utilized LangChain at Mesh AI to automate natural language query processing and implement Llama-Index for data indexing, ensuring faster, more accurate query responses. LangChain enabled seamless natural language processing, allowing users to interact with complex data queries in an intuitive format, which improved response relevance and reduced retrieval times significantly.",
+                "Developed advanced NLP processing pipelines using LangChain in Mesh AI, enhancing the accessibility of SQL data by allowing non-technical users to retrieve complex information using natural language. This improvement made data querying intuitive, which streamlined data interactions and resulted in increased user adoption."
+            ],
+            RAG: [
+                "Integrated Retrieval-Augmented Generation (RAG) in chatbot interactions at Mesh AI, combining live data retrieval with generative responses to ensure contextually relevant and up-to-date answers. This system allowed users to obtain accurate, data-backed responses in real-time, improving user experience by providing dynamically generated, context-specific interactions.",
+                "Employed RAG to enhance chatbot precision at Mesh AI, combining data-driven retrievals with generative outputs, allowing users to engage with live database insights. This enabled a more interactive and informative experience, with chatbot responses tailored to specific queries based on real-time data updates."
+            ],
+            PostgreSQL: [
+                "Designed and managed PostgreSQL databases for high-frequency user interactions at Bitlearns, handling real-time data storage and retrieval with minimal latency. Implemented rigorous data integrity checks and efficient indexing, which supported scalable data management and enabled robust data-driven functionalities.",
+                "Engineered multi-table PostgreSQL systems in Mesh AI, optimized for complex data transactions and tailored for efficient natural language SQL query handling. This enabled real-time scheduling and streamlined data analysis, making backend operations faster and more reliable."
+            ],
+            Api: [
+                "Built secure RESTful API services at Preeminent Technology, integrating third-party booking APIs with real-time synchronization to provide accurate data exchange. Optimized endpoint performance for scalable, high-speed transactions, ensuring reliable data consistency."
+            ],
+            "Socket.io": [
+                "Implemented real-time notification services using Socket.io at Bitlearns, facilitating instant updates for educators regarding student sign-ups and engagement. This system allowed teachers to monitor user activity in real-time, improving student-teacher interactions."
+            ],
+            Data: [
+                "Designed automated data pipelines for RAPYD LinX, reducing sales data processing time by 5x. Structured data workflows for efficient storage and retrieval, streamlining data handling and providing quick access for strategic decision-making."
+            ],
+            FastAPI: [
+                "Integrated FastAPI in Mesh AI's scheduling systems with AWS Lambda, enhancing scalability for high-frequency scheduling requests and optimizing request processing speed. Implemented secure endpoint management to ensure data privacy and quick response handling."
+            ]
+
+
+        };
+        function openSkillModal(skill) {
+            const modal = document.getElementById('skill-modal');
+            const skillContent = document.getElementById('skillContent');
+            skillContent.innerHTML = `<h3>${skill}</h3><ul>${skillsData[skill].map(detail => `<li>${detail}</li>`).join('')}</ul>`;
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSkillModal() {
+            document.getElementById('skill-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        window.onclick = function (event) {
+            const modal = document.getElementById('skill-modal');
+            if (event.target == modal) {
+                closeSkillModal();
+            }
+        };
+        function clearForm() {
+            setTimeout(function () {
+                document.getElementById('contactForm').reset();
+            }, 100);
+        }
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+
+</html>
