@@ -83,12 +83,12 @@
             margin-bottom: 50px;
         }
 
-        .nav {
+        nav {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            padding: 20px 50px;
+            padding: 15px 30px;
             background: rgba(10, 25, 47, 0.85);
             backdrop-filter: blur(10px);
             z-index: 1000;
@@ -105,7 +105,7 @@
             justify-content: flex-end;
             align-items: center;
             list-style: none;
-            gap: 30px;
+            gap: 20px;
         }
 
         .nav-links a {
@@ -443,10 +443,9 @@
 
 
         .titles {
-            margin-top: 10px;
+            margin-top: 5px;
             font-family: var(--font-mono);
             font-size: 1.25rem;
-            /* color: #8892b0; */
             color: var(--secondary);
             border-bottom: 1px solid var(--primary-color);
             display: inline-block;
@@ -455,9 +454,8 @@
             animation: fadeIn 0.5s forwards 1s;
         }
 
-
         .typing-line {
-            font-size: 20px;
+            font-size: 1.15rem;
             border-right: 2px solid var(--cursor-color);
             white-space: nowrap;
             overflow: hidden;
@@ -494,7 +492,7 @@
             }
 
             100% {
-                width: 650px;
+                width: 100%;
                 opacity: 1;
             }
         }
@@ -506,7 +504,7 @@
             }
 
             100% {
-                width: 650px;
+                width: 100%;
                 opacity: 1;
             }
         }
@@ -518,7 +516,7 @@
             }
 
             100% {
-                width: 650px;
+                width: 100%;
                 opacity: 1;
             }
         }
@@ -609,6 +607,74 @@
 
             .recommendation-card {
                 padding: 20px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .titles {
+                font-size: 1.1rem;
+            }
+
+            .typing-line {
+                font-size: 0.9rem;
+            }
+
+            .nav {
+                padding: 15px 20px;
+            }
+
+            .nav-links a {
+                font-size: 1rem;
+                padding: 8px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .titles {
+                font-size: 1rem;
+                margin-top: 5px;
+            }
+
+            .typing-line {
+                font-size: 0.85rem;
+            }
+
+            .nav {
+                padding: 10px 15px;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .nav-links a {
+                font-size: 0.9rem;
+                padding: 6px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .titles {
+                font-size: 0.9rem;
+                margin-top: 3px;
+            }
+
+            .typing-line {
+                font-size: 0.8rem;
+            }
+
+            .nav {
+                padding: 8px 10px;
+            }
+
+            .nav-links {
+                gap: 10px;
+                flex-direction: column;
+            }
+
+            .nav-links a {
+                font-size: 0.8rem;
+                padding: 5px;
             }
         }
     </style>>
