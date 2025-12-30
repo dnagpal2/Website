@@ -164,6 +164,9 @@
             left: 0;
             width: 100%;
             padding: 15px 30px;
+            padding-top: calc(15px + env(safe-area-inset-top));
+            padding-left: calc(30px + env(safe-area-inset-left));
+            padding-right: calc(30px + env(safe-area-inset-right));
             background: rgba(10, 25, 47, 0.85);
             backdrop-filter: blur(10px);
             z-index: 1000;
@@ -1044,10 +1047,13 @@
 
             .nav {
                 padding: 10px 15px;
+                padding-top: calc(10px + env(safe-area-inset-top));
             }
 
             .nav-links {
-                gap: 15px;
+                gap: 12px;
+                flex-wrap: wrap;
+                justify-content: center;
             }
 
             .nav-links a {
@@ -1068,11 +1074,14 @@
 
             .nav {
                 padding: 8px 10px;
+                padding-top: calc(8px + env(safe-area-inset-top));
             }
 
             .nav-links {
                 gap: 10px;
                 flex-direction: column;
+                align-items: center;
+                width: 100%;
             }
 
             .nav-links a {
@@ -1252,10 +1261,6 @@
 
         .tech-loop-item:hover {
             transform: scale(1.2);
-        }
-
-        .fastapi-icon {
-            font-size: 42px;
         }
     </style>
 
@@ -1500,8 +1505,8 @@
                         <div class="tech-loop-item" title="TypeScript">
                             <i class="devicon-typescript-plain"></i>
                         </div>
-                        <div class="tech-loop-item" title="Next.js">
-                            <i class="devicon-nextjs-original"></i>
+                        <div class="tech-loop-item" title="Nest.js">
+                            <i class="devicon-nestjs-original"></i>
                         </div>
                         <div class="tech-loop-item" title="Python">
                             <i class="devicon-python-plain"></i>
@@ -1678,6 +1683,8 @@
             gap: 30
         };
 
+        let stackConfig = { ...STACK };
+
         /* ================= Stack State ================= */
 
         let stackEnabled = false;
@@ -1688,18 +1695,35 @@
 
         /* ================= Measure (ONCE) ================= */
 
+        function refreshStackConfig() {
+            const isSmall = window.innerWidth <= 768;
+            stackConfig = {
+                ...STACK,
+                stackStart: isSmall ? 0.32 : STACK.stackStart,
+                scaleEnd: isSmall ? 0.16 : STACK.scaleEnd,
+                baseScale: isSmall ? 0.9 : STACK.baseScale,
+                gap: isSmall ? 20 : STACK.gap
+            };
+        }
+
         function measureStack() {
+            refreshStackConfig();
             const vh = window.innerHeight;
             const endTop = endMarker.getBoundingClientRect().top + window.scrollY;
 
             stackData = cards.map((card, i) => {
                 const top = card.getBoundingClientRect().top + window.scrollY;
+                const start = top - vh * stackConfig.stackStart - i * stackConfig.gap;
+                const end = top - vh * stackConfig.scaleEnd;
+                const pinRaw = endTop - vh / 2;
+                const pin = Math.max(pinRaw, start + vh * 0.6);
+
                 return {
                     card,
                     i,
-                    start: top - vh * STACK.stackStart - i * STACK.gap,
-                    end: top - vh * STACK.scaleEnd,
-                    pin: endTop - vh / 2
+                    start,
+                    end,
+                    pin
                 };
             });
         }
@@ -1712,7 +1736,7 @@
             for (const d of stackData) {
                 const p = clamp01((y - d.start) / (d.end - d.start));
                 const scale =
-                    1 - p * (1 - (STACK.baseScale + d.i * STACK.scaleStep));
+                    1 - p * (1 - (stackConfig.baseScale + d.i * stackConfig.scaleStep));
 
                 let ty = 0;
                 if (y > d.start && y < d.pin) ty = y - d.start;
@@ -1743,7 +1767,7 @@
             folderToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
 
             if (folderSub) {
-                folderSub.textContent = isOpen ? 'Scroll to explore' : 'Click to open';
+                folderSub.textContent = isOpen ? 'Click to close' : 'Click to open';
             }
 
             if (isOpen && options.scroll) {
@@ -1781,7 +1805,9 @@
         });
 
         window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('touchmove', onScroll, { passive: true });
         window.addEventListener('resize', () => stackEnabled && measureStack());
+        window.addEventListener('load', () => stackEnabled && measureStack());
 
         /* ================= Nav Scroll ================= */
 
@@ -1918,7 +1944,7 @@
             pillIndicator.style.width = `${width}px`;
             pillIndicator.style.transform = `translateX(${x}px)`;
 
-            // 🔥 text color fix
+            //  text color fix
             pillLinks.forEach(link => link.classList.remove('is-active'));
             target.classList.add('is-active');
         }
