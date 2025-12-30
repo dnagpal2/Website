@@ -1277,6 +1277,92 @@
                 display: none;
             }
         }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .mobile-menu-btn span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--light-slate);
+            margin: 5px 0;
+        }
+
+        .mobile-sidebar {
+            position: fixed;
+            top: 0;
+            right: -280px;
+            width: 280px;
+            height: 100vh;
+            background: linear-gradient(180deg,
+                    #0b1220,
+                    #05070c);
+            padding: 80px 24px;
+            z-index: 2000;
+            transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .mobile-sidebar a {
+            color: var(--light-slate);
+            font-family: var(--font-mono);
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+        .mobile-sidebar a:hover {
+            color: var(--secondary);
+        }
+
+        .mobile-sidebar.open {
+            right: 0;
+        }
+
+        .close-sidebar {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--light-slate);
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        .sidebar-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 1500;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar-backdrop.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* MOBILE ONLY */
+        @media (max-width: 768px) {
+            .pill-list {
+                display: none;
+                /* hide pills */
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                margin-left: auto;
+            }
+        }
     </style>
 
 </head>
@@ -1299,6 +1385,11 @@
         </div>
     </header>
     <nav class="nav pill-nav">
+        <button class="mobile-menu-btn" aria-label="Open menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         <ul class="pill-list" id="pillNav">
             <span class="pill-indicator"></span>
 
@@ -1309,6 +1400,17 @@
             <li><a href="#contact" class="pill-link">Contact</a></li>
         </ul>
     </nav>
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <button class="close-sidebar" aria-label="Close menu">×</button>
+
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#recommendations">Recommendations</a>
+        <a href="#contact">Contact</a>
+    </div>
+
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
     <section id="experience" class="section experience-section">
         <div class="container">
             <h2 class="section-title"><a href="#experience-folder">Experience</a></h2>
@@ -2053,6 +2155,31 @@
         });
         loop.addEventListener('mouseleave', () => {
             isHovered = false;
+        });
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        const sidebar = document.getElementById('mobileSidebar');
+        const backdrop = document.getElementById('sidebarBackdrop');
+        const closeBtn = document.querySelector('.close-sidebar');
+
+        function openSidebar() {
+            sidebar.classList.add('open');
+            backdrop.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSidebar() {
+            sidebar.classList.remove('open');
+            backdrop.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        menuBtn.addEventListener('click', openSidebar);
+        closeBtn.addEventListener('click', closeSidebar);
+        backdrop.addEventListener('click', closeSidebar);
+
+        // auto-close on navigation
+        sidebar.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeSidebar);
         });
     </script>
 </body>
