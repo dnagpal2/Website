@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -11,14 +11,32 @@
     <meta property="og:type" content="website">
     <title>Devraj Nagpal - Software Engineer</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
     <style>
         :root {
-            --primary: #0a192f;
-            --secondary: #64ffda;
-            --navy-light: #112240;
-            --slate: #8892b0;
-            --light-slate: #ccd6f6;
-            --white: #e6f1ff;
+            /* Foundations */
+            --primary: #05070c;
+            /* near-black background */
+            --navy-light: #0b1220;
+            /* deep blue surface */
+            --navy-card: #0f1a2e;
+            /* cards / panels */
+
+            /* Text */
+            --slate: #9aa4b2;
+            /* secondary text */
+            --light-slate: #e6edf3;
+            /* primary text */
+            --white: #ffffff;
+
+            /* Accents */
+            --secondary: #3b82f6;
+            /* BLUE (primary accent) */
+            --accent-soft: #60a5fa;
+            /* hover / subtle blue */
+            --accent-cyan: #64ffda;
+            /* motion-only highlight */
+
             --font-mono: 'SF Mono', 'Fira Code', monospace;
         }
 
@@ -32,7 +50,34 @@
         body {
             background-color: var(--primary);
             color: var(--slate);
-            line-height: 1.6;
+        }
+
+        .skills-group,
+        .experience-card,
+        .project-card,
+        .recommendation-card,
+        .contact-form,
+        .modal-content {
+            background: var(--navy-card);
+        }
+
+        .tech-item,
+        .skill-tag,
+        .pill-link,
+        .tech-loop-item {
+            color: var(--secondary);
+            /* blue */
+        }
+
+        .pill-indicator {
+            background: var(--secondary);
+            /* blue pill */
+        }
+
+        .pill-link.is-active,
+        .pill-link:hover {
+            color: var(--primary);
+            /* readable on blue */
         }
 
         .header {
@@ -58,8 +103,33 @@
             z-index: -1;
         }
 
+        .header::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 260px;
+            /* controls smoothness */
+            background: linear-gradient(to bottom,
+                    rgba(5, 7, 12, 0) 0%,
+                    #05070c 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
         .header-content {
             max-width: 1000px;
+        }
+
+        .hero-avatar {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 2px solid var(--secondary);
+            box-shadow: 0 12px 30px rgba(2, 12, 27, 0.6);
         }
 
         .mono-text {
@@ -147,20 +217,218 @@
             background-color: var(--secondary);
         }
 
-        .experience-grid {
+        .section-title a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .section-title a:hover {
+            color: var(--secondary);
+        }
+
+        .folder-section {
+            padding-bottom: 40px;
+        }
+
+        .folder-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .folder-toggle {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .folder {
+            width: 280px;
+            height: 170px;
+            background: linear-gradient(135deg,
+                    #0f1a2e 0%,
+                    #0b1220 55%,
+                    #05070c 100%);
+            border-radius: 14px;
+            position: relative;
+            border: 1px solid rgba(59, 130, 246, 0.28);
+            /* BLUE border */
+            box-shadow: 0 20px 30px -15px rgba(2, 12, 27, 0.7);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            perspective: 600px;
+        }
+
+        .folder-tab {
+            position: absolute;
+            top: -18px;
+            left: 24px;
+            width: 120px;
+            height: 36px;
+            background: linear-gradient(135deg,
+                    #0f1a2e 0%,
+                    #0b1220 55%,
+                    #05070c 100%);
+            border: 1px solid rgba(59, 130, 246, 0.28);
+            border-bottom: none;
+            border-radius: 10px 10px 0 0;
+            z-index: 2;
+        }
+
+        .folder-lid {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 58%;
+            background: linear-gradient(135deg,
+                    rgba(59, 130, 246, 0.18),
+                    rgba(11, 18, 32, 0.75));
+            border-radius: 14px 14px 10px 10px;
+            transform-origin: top center;
+            transform: rotateX(0deg);
+            transition: transform 0.4s ease;
+            z-index: 3;
+            backface-visibility: hidden;
+        }
+
+        .folder-front {
+            position: absolute;
+            inset: 0;
+            border-radius: 14px;
+            background: linear-gradient(135deg,
+                    rgba(59, 130, 246, 0.08),
+                    rgba(11, 18, 32, 0.35));
+            z-index: 1;
+        }
+
+
+        .folder-files {
+            position: absolute;
+            inset: 16px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            gap: 8px;
+            z-index: 0;
+        }
+
+        .folder-file {
+            height: 14px;
+            border-radius: 6px;
+            background: rgba(59, 130, 246, 0.18);
+            border: 1px solid rgba(59, 130, 246, 0.28);
+            opacity: 0;
+            transform: translateY(8px) scale(0.98);
+            transition: transform 0.35s ease, opacity 0.35s ease;
+        }
+
+        .folder-label {
+            position: absolute;
+            bottom: 18px;
+            left: 18px;
+            right: 18px;
+            text-align: left;
+            color: var(--light-slate);
+            font-size: 18px;
+            z-index: 4;
+        }
+
+        .folder-sub {
+            display: block;
+            color: var(--slate);
+            font-size: 12px;
+            margin-top: 4px;
+            font-family: var(--font-mono);
+        }
+
+        .folder-link {
+            width: 2px;
+            height: 0;
+            background: var(--secondary);
+            opacity: 0;
+            transition: height 0.3s ease, opacity 0.3s ease;
+        }
+
+        .folder-section.open .folder {
+            transform: translateY(6px);
+            box-shadow: 0 25px 35px -20px rgba(2, 12, 27, 0.7);
+            animation: folderPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .folder-section.open .folder-lid {
+            transform: rotateX(65deg);
+        }
+
+        .folder-section.open .folder-file {
+            opacity: 1;
+            transform: translateY(-10px) scale(1);
+        }
+
+        .folder-section.open .folder-file:nth-child(1) {
+            transition-delay: 0.05s;
+        }
+
+        .folder-section.open .folder-file:nth-child(2) {
+            transition-delay: 0.1s;
+        }
+
+        .folder-section.open .folder-file:nth-child(3) {
+            transition-delay: 0.15s;
+        }
+
+        .folder-section.open .folder-link {
+            height: 40px;
+            opacity: 1;
+            animation: linkGrow 0.35s ease-out;
+        }
+
+        .scroll-stack {
+            position: relative;
+            display: grid;
+            gap: 120px;
+            padding: 10vh 0 40vh;
+        }
+
+        .scroll-stack-card {
+            transform-origin: top center;
+            will-change: transform, filter;
+            backface-visibility: hidden;
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+            position: relative;
+            margin: 30px auto;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .experience-panel {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transform: translateY(-8px);
+            transition: max-height 0.5s ease, opacity 0.4s ease, transform 0.4s ease;
+            pointer-events: none;
+        }
+
+        .experience-panel.open {
+            max-height: 5000px;
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+            overflow: visible;
         }
 
         .experience-card {
             background: var(--navy-light);
-            padding: 25px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
+            padding: 32px;
+            border-radius: 24px;
+            cursor: default;
+            transition: box-shadow 0.3s;
             position: relative;
             overflow: hidden;
+            will-change: transform, filter;
+            transform-origin: center top;
+            min-height: 320px;
         }
 
         .experience-card::before {
@@ -179,9 +447,18 @@
         }
 
         .experience-card:hover {
-            transform: translateY(-5px);
             box-shadow: 0 20px 30px -15px rgba(2, 12, 27, 0.7);
         }
+
+        .experience-section.open .section-title {
+            animation: titlePop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .scroll-stack-end {
+            width: 100%;
+            height: 1px;
+        }
+
 
         .experience-card h3 {
             color: var(--light-slate);
@@ -189,10 +466,40 @@
             font-size: 22px;
         }
 
-        .experience-card p {
+        .experience-card .role,
+        .experience-card .period {
             color: var(--secondary);
             font-family: var(--font-mono);
             font-size: 13px;
+        }
+
+        .experience-detail {
+            color: var(--light-slate);
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .tech-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--secondary);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+        }
+
+        .tech-item i {
+            font-size: 12px;
         }
 
         .company-logo {
@@ -207,8 +514,36 @@
 
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 20px;
+        }
+
+        .skills-group {
+            background: var(--navy-light);
+            padding: 20px;
+            border-radius: 4px;
+            border: 1px solid rgba(100, 255, 218, 0.08);
+        }
+
+        .skills-group h3 {
+            color: var(--light-slate);
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            color: var(--secondary);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: 999px;
+            padding: 4px 10px;
+            font-family: var(--font-mono);
+            font-size: 12px;
         }
 
         .skill-item {
@@ -271,7 +606,7 @@
         }
 
         .modal-content li::before {
-            content: '▹';
+            content: '>';
             position: absolute;
             left: 0;
             color: var(--secondary);
@@ -409,6 +744,46 @@
             }
         }
 
+        @keyframes folderPop {
+            0% {
+                transform: translateY(0) scale(0.96);
+            }
+
+            60% {
+                transform: translateY(8px) scale(1.04);
+            }
+
+            100% {
+                transform: translateY(6px) scale(1);
+            }
+        }
+
+        @keyframes titlePop {
+            0% {
+                transform: translateY(6px) scale(0.98);
+            }
+
+            70% {
+                transform: translateY(-2px) scale(1.02);
+            }
+
+            100% {
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes linkGrow {
+            0% {
+                height: 0;
+                opacity: 0;
+            }
+
+            100% {
+                height: 40px;
+                opacity: 1;
+            }
+        }
+
         @media (max-width: 768px) {
             .header {
                 padding: 0 50px;
@@ -457,6 +832,29 @@
             padding-bottom: 0.5rem;
             opacity: 0;
             animation: fadeIn 0.5s forwards 1s;
+        }
+
+        .text-rotate {
+            display: inline-flex;
+            flex-wrap: wrap;
+            white-space: pre-wrap;
+            position: relative;
+            font-family: var(--font-mono);
+            color: var(--secondary);
+        }
+
+        .text-rotate-word {
+            display: inline-flex;
+        }
+
+        .text-rotate-element {
+            display: inline-block;
+            transform: translateY(100%);
+            opacity: 0;
+        }
+
+        .text-rotate-space {
+            white-space: pre;
         }
 
         .typing-line {
@@ -682,7 +1080,184 @@
                 padding: 5px;
             }
         }
-    </style>>
+
+        /* ================= CARD EJECT ANIMATION ================= */
+
+        .experience-panel.ejecting .scroll-stack-card {
+            animation: ejectFromFolder 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+        }
+
+        .experience-panel.ejecting .scroll-stack-card:nth-child(1) {
+            animation-delay: 0.05s;
+        }
+
+        .experience-panel.ejecting .scroll-stack-card:nth-child(2) {
+            animation-delay: 0.10s;
+        }
+
+        .experience-panel.ejecting .scroll-stack-card:nth-child(3) {
+            animation-delay: 0.15s;
+        }
+
+        .experience-panel.ejecting .scroll-stack-card:nth-child(4) {
+            animation-delay: 0.20s;
+        }
+
+        .experience-panel.ejecting .scroll-stack-card:nth-child(5) {
+            animation-delay: 0.25s;
+        }
+
+        .experience-panel.ejecting .scroll-stack-card:nth-child(6) {
+            animation-delay: 0.30s;
+        }
+
+        .experience-panel.ejecting .scroll-stack-card:nth-child(7) {
+            animation-delay: 0.35s;
+        }
+
+        @keyframes ejectFromFolder {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.96);
+            }
+
+            60% {
+                opacity: 1;
+                transform: translateY(8px) scale(1.03);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .pill-nav {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .pill-list {
+            position: relative;
+            display: flex;
+            gap: 6px;
+            padding: 6px;
+            background: rgba(10, 25, 47, 0.9);
+            border-radius: 9999px;
+        }
+
+        .pill-list li {
+            list-style: none;
+        }
+
+        .pill-link {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 18px;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--secondary);
+            border-radius: 9999px;
+            z-index: 2;
+            transition: color 0.25s ease;
+        }
+
+        .pill-link:hover {
+            color: #0a192f;
+        }
+
+        .pill-indicator {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            height: calc(100% - 12px);
+            width: 0;
+            background: var(--secondary);
+            border-radius: 9999px;
+            transition:
+                transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+                width 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .pill-link {
+            color: var(--secondary);
+            transition: color 0.25s ease;
+        }
+
+        /* When pill is on this item */
+        .pill-link.is-active {
+            color: #0a192f;
+            /* dark text on light pill */
+        }
+
+        /* Hover should also force dark text */
+        .pill-link:hover {
+            color: #0a192f;
+        }
+
+        .tech-loop-wrapper {
+            position: relative;
+            overflow: hidden;
+            padding: 1.5rem 0;
+        }
+
+        .tech-loop {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .tech-loop::before,
+        .tech-loop::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 80px;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .tech-loop::before {
+            left: 0;
+            background: linear-gradient(to right, var(--primary), transparent);
+        }
+
+        .tech-loop::after {
+            right: 0;
+            background: linear-gradient(to left, var(--primary), transparent);
+        }
+
+        .tech-loop-track {
+            display: flex;
+            width: max-content;
+            will-change: transform;
+        }
+
+        .tech-loop-item {
+            flex: 0 0 auto;
+            font-size: 48px;
+            margin-right: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            transition: transform 0.3s ease;
+        }
+
+        .tech-loop-item:hover {
+            transform: scale(1.2);
+        }
+
+        .fastapi-icon {
+            font-size: 42px;
+        }
+    </style>
 
 </head>
 
@@ -690,8 +1265,11 @@
     <header class="header">
         <div class="header-content">
             <h5 class="mono-text">Hi, my name is</h5>
+            <img src="images/startup_founder.png" alt="Devraj Nagpal portrait" class="hero-avatar">
             <h1>Devraj Nagpal</h1>
-            <h3 class="titles">Software Engineer | Data Engineer | Full Stack Engineer</h3>
+            <h3 class="titles">
+                <span id="rotating-text" class="text-rotate"></span>
+            </h3>
             <div>
                 <span class="typing-line line1">I'm a software engineer with a focus on developing intelligent,</span>
                 <span class="typing-line line2">AI-driven applications. I specialize in enhancing user
@@ -700,145 +1278,238 @@
             </div>
         </div>
     </header>
-    <nav class="nav">
-        <ul class="nav-links">
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#recommendations">Recommendations</a></li>
-            <li><a href="#contact">Contact</a></li>
+    <nav class="nav pill-nav">
+        <ul class="pill-list" id="pillNav">
+            <span class="pill-indicator"></span>
+
+            <li><a href="#experience" class="pill-link">Experience</a></li>
+            <li><a href="#skills" class="pill-link">Skills</a></li>
+            <li><a href="#projects" class="pill-link">Projects</a></li>
+            <li><a href="#recommendations" class="pill-link">Recommendations</a></li>
+            <li><a href="#contact" class="pill-link">Contact</a></li>
         </ul>
     </nav>
-    <section id="experience" class="section">
+    <section id="experience" class="section experience-section">
         <div class="container">
-            <h2 class="section-title">Experience</h2>
-            <div class="experience-grid">
-                <div class="experience-card" onclick="openModal('bitlearns')">
-                    <img src="images/bitlearns_logo.png" alt="Bitlearns Logo" class="company-logo">
-                    <h3>Bitlearns</h3>
-                    <p>Full Stack Engineer</p>
-                    <p>July 2024 - November 2024</p>
+            <h2 class="section-title"><a href="#experience-folder">Experience</a></h2>
+            <div id="experience-folder" class="folder-section">
+                <div class="folder-wrap">
+                    <button class="folder-toggle" id="folder-toggle" type="button" aria-expanded="false"
+                        aria-controls="experience-panel">
+                        <div class="folder">
+                            <div class="folder-tab"></div>
+                            <div class="folder-lid"></div>
+                            <div class="folder-files">
+                                <span class="folder-file"></span>
+                                <span class="folder-file"></span>
+                                <span class="folder-file"></span>
+                            </div>
+                            <div class="folder-front"></div>
+                            <div class="folder-label">
+                                Experience
+                                <span class="folder-sub" id="folder-sub">Click to open</span>
+                            </div>
+                        </div>
+                    </button>
+                    <div class="folder-link" aria-hidden="true"></div>
                 </div>
-                <div class="experience-card" onclick="openModal('meshAi')">
-                    <img src="images/meshAI_logo.png" alt="Mesh AI Logo" class="company-logo">
-                    <h3>Mesh AI</h3>
-                    <p>Data Engineer</p>
-                    <p>August 2024 - November 2024</p>
-                </div>
-                <div class="experience-card" onclick="openModal('preeminentTech')">
-                    <img src="images/preeminentTech.png" alt="Preeminent Technology Logo" class="company-logo">
-                    <h3>Preeminent Technology Inc</h3>
-                    <p>Backend Engineer</p>
-                    <p>August 2024 - October 2024</p>
-                </div>
-                <div class="experience-card" onclick="openModal('rapyd')">
-                    <img src="images/rapydLinx.png" alt="RAPYD LinX Logo" class="company-logo">
-                    <h3>RAPYD LinX</h3>
-                    <p>Software Engineer</p>
-                    <p>May 2024 - August 2024</p>
-                </div>
-                <div class="experience-card" onclick="openModal('rocscience')">
-                    <img src="images/rocscience.png" alt="Rocscience Logo" class="company-logo">
-                    <h3>Rocscience</h3>
-                    <p>Software QA Developer</p>
-                    <p>May 2023 - August 2023</p>
-                </div>
-                <div class="experience-card" onclick="openModal('weBots')">
-                    <img src="images/weBots.png" alt="Western WE-BOTS Logo" class="company-logo">
-                    <h3>Western WE-BOTS</h3>
-                    <p>Firmware Engineer</p>
-                    <p>November 2022 - January 2024</p>
+            </div>
+            <div class="experience-panel" id="experience-panel">
+                <div class="scroll-stack" id="experience-stack">
+                    <div class="experience-card scroll-stack-card">
+                        <img src="images/WSP-Logo-Thumbnail-1200x630.png" alt="WSP Logo" class="company-logo">
+                        <h3>WSP</h3>
+                        <p class="role">Software Engineer Intern</p>
+                        <p class="period">May 2025 - August 2025 | Toronto, ON</p>
+                        <p class="experience-detail">Built a project staffing and onboarding platform for engineering
+                            teams.</p>
+                        <div class="tech-stack">
+                            <span class="tech-item"><i class="fas fa-code"></i>TypeScript</span>
+                            <span class="tech-item"><i class="fas fa-layer-group"></i>Next.js</span>
+                            <span class="tech-item"><i class="fas fa-database"></i>Azure SQL</span>
+                            <span class="tech-item"><i class="fas fa-diagram-project"></i>GraphQL</span>
+                        </div>
+                    </div>
+                    <div class="experience-card scroll-stack-card">
+                        <img src="images/swimingo.jpg" alt="Swimingo Logo" class="company-logo">
+                        <h3>Swimingo</h3>
+                        <p class="role">Software Engineer Intern</p>
+                        <p class="period">February 2025 - May 2025 | Toronto, ON</p>
+                        <p class="experience-detail">Built a timezone-aware scheduling and promotions layer for global
+                            bookings.</p>
+                        <div class="tech-stack">
+                            <span class="tech-item"><i class="fab fa-node-js"></i>Node.js</span>
+                            <span class="tech-item"><i class="fas fa-database"></i>Sequelize</span>
+                            <span class="tech-item"><i class="fas fa-database"></i>PostgreSQL</span>
+                        </div>
+                    </div>
+                    <div class="experience-card scroll-stack-card">
+                        <img src="images/bitlearns_logo.png" alt="Bitlearns Logo" class="company-logo">
+                        <h3>Bitlearns</h3>
+                        <p class="role">Full Stack Engineer Intern</p>
+                        <p class="period">July 2024 - November 2024 | Toronto, ON</p>
+                        <p class="experience-detail">Built AI-backed learning features and real-time notifications to
+                            boost engagement.</p>
+                        <div class="tech-stack">
+                            <span class="tech-item"><i class="fab fa-react"></i>React</span>
+                            <span class="tech-item"><i class="fab fa-node-js"></i>Node.js</span>
+                            <span class="tech-item"><i class="fas fa-code"></i>TypeScript</span>
+                            <span class="tech-item"><i class="fas fa-bolt"></i>Socket.io</span>
+                        </div>
+                    </div>
+                    <div class="experience-card scroll-stack-card">
+                        <img src="images/meshAI_logo.png" alt="Mesh AI Logo" class="company-logo">
+                        <h3>Mesh AI</h3>
+                        <p class="role">Software Engineer Intern</p>
+                        <p class="period">August 2024 - November 2024 | Toronto, ON</p>
+                        <p class="experience-detail">Delivered an LLM-powered SQL assistant with safe text-to-SQL for
+                            clinicians.</p>
+                        <div class="tech-stack">
+                            <span class="tech-item"><i class="fab fa-python"></i>Python</span>
+                            <span class="tech-item"><i class="fas fa-link"></i>LangChain</span>
+                            <span class="tech-item"><i class="fas fa-cloud"></i>AWS Lambda</span>
+                            <span class="tech-item"><i class="fas fa-database"></i>PostgreSQL</span>
+                        </div>
+                    </div>
+                    <div class="experience-card scroll-stack-card">
+                        <img src="images/preeminentTech.png" alt="Preeminent Technology Logo" class="company-logo">
+                        <h3>Preeminent Technology Inc</h3>
+                        <p class="role">Backend Engineer Intern</p>
+                        <p class="period">August 2024 - October 2024 | Toronto, ON</p>
+                        <p class="experience-detail">Built backend services powering AI-assisted travel booking
+                            workflows.</p>
+                        <div class="tech-stack">
+                            <span class="tech-item"><i class="fas fa-code"></i>.NET</span>
+                            <span class="tech-item"><i class="fab fa-node-js"></i>Node.js</span>
+                            <span class="tech-item"><i class="fas fa-cloud"></i>Azure</span>
+                        </div>
+                    </div>
+                    <div class="experience-card scroll-stack-card">
+                        <img src="images/rapydLinx.png" alt="RAPYD LinX Logo" class="company-logo">
+                        <h3>RAPYD LinX</h3>
+                        <p class="role">Software Engineer Intern</p>
+                        <p class="period">May 2024 - August 2024 | Toronto, ON</p>
+                        <p class="experience-detail">Automated sales processing and reporting workflows for the sales
+                            team.</p>
+                        <div class="tech-stack">
+                            <span class="tech-item"><i class="fab fa-python"></i>Python</span>
+                            <span class="tech-item"><i class="fas fa-database"></i>SQL</span>
+                            <span class="tech-item"><i class="fas fa-desktop"></i>JavaFX</span>
+                        </div>
+                    </div>
+                    <div class="experience-card scroll-stack-card">
+                        <img src="images/rocscience.png" alt="Rocscience Logo" class="company-logo">
+                        <h3>Rocscience</h3>
+                        <p class="role">Software Engineer Intern</p>
+                        <p class="period">May 2023 - August 2023 | Toronto, ON</p>
+                        <p class="experience-detail">Automated verification for geotechnical builds to speed regression
+                            testing.</p>
+                        <div class="tech-stack">
+                            <span class="tech-item"><i class="fab fa-python"></i>Python</span>
+                            <span class="tech-item"><i class="fas fa-gear"></i>Automation</span>
+                        </div>
+                    </div>
+                    <div class="experience-card scroll-stack-card">
+                        <img src="images/weBots.png" alt="Western WE-BOTS Logo" class="company-logo">
+                        <h3>Western WE-BOTS</h3>
+                        <p class="role">Firmware Engineer</p>
+                        <p class="period">November 2022 - January 2024 | London, ON</p>
+                        <p class="experience-detail">Built CAN/ROS telemetry and firmware for a life-size robot's motion
+                            data.</p>
+                        <div class="tech-stack">
+                            <span class="tech-item"><i class="fas fa-microchip"></i>C++</span>
+                            <span class="tech-item"><i class="fas fa-robot"></i>ROS</span>
+                            <span class="tech-item"><i class="fas fa-wifi"></i>MQTT</span>
+                        </div>
+                    </div>
+                    <div class="scroll-stack-end"></div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Modal templates -->
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <div id="modalContent"></div>
-        </div>
-    </div>
-
     <section id="skills" class="section">
         <div class="container">
             <h2 class="section-title">Skills</h2>
             <div class="skills-grid">
-                <div class="skill-item" onclick="openSkillModal('Python')">
-                    <i class="fab fa-python skill-icon"></i>
-                    <p>Python</p>
+                <div class="skills-group">
+                    <h3>Languages & Frameworks</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Spring Boot</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">FastAPI</span>
+                    </div>
                 </div>
-                <div class="skill-item" onclick="openSkillModal('JavaScript')">
-                    <i class="fab fa-js skill-icon"></i>
-                    <p>JavaScript</p>
+                <div class="skills-group">
+                    <h3>Data & Storage</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">Azure SQL</span>
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">Redis</span>
+                        <span class="skill-tag">Kafka</span>
+                        <span class="skill-tag">Prisma</span>
+                    </div>
                 </div>
-                <div class="skill-item" onclick="openSkillModal('TypeScript')">
-                    <i class="fas fa-code skill-icon"></i>
-                    <p>TypeScript</p>
+                <div class="skills-group">
+                    <h3>AI & ML</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">LLMs</span>
+                        <span class="skill-tag">LangChain</span>
+                        <span class="skill-tag">RAG</span>
+                        <span class="skill-tag">TensorFlow</span>
+                        <span class="skill-tag">PyTorch</span>
+                    </div>
                 </div>
-                <div class="skill-item" onclick="openSkillModal('React.js')">
-                    <i class="fab fa-react skill-icon"></i>
-                    <p>React.js</p>
+                <div class="skills-group">
+                    <h3>Tools & Cloud</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">GCP</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Jenkins</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Jira</span>
+                        <span class="skill-tag">Postman</span>
+                    </div>
                 </div>
-                <div class="skill-item" onclick="openSkillModal('Java')">
-                    <i class="fab fa-java skill-icon"></i>
-                    <p>Java</p>
-                </div>
-                <div class="skill-item" onclick="openSkillModal('SQL')">
-                    <i class="fas fa-database skill-icon"></i>
-                    <p>SQL</p>
-                </div>
-                <div class="skill-item" onclick="openSkillModal('Git')">
-                    <i class="fab fa-git-alt skill-icon"></i>
-                    <p>Git</p>
-                </div>
-                <div class="skill-item" onclick="openSkillModal('LLM Models')">
-                    <i class="fas fa-brain skill-icon"></i>
-                    <p>LLM Models</p>
-                </div>
-                <div class="skill-item" onclick="openSkillModal('TensorFlow')">
-                    <i class="fas fa-cogs skill-icon"></i>
-                    <p>TensorFlow</p>
-                </div>
-                <div class="skill-item" onclick="openSkillModal('PyTorch')">
-                    <i class="fas fa-robot skill-icon"></i>
-                    <p>PyTorch</p>
-                </div>
-                <div class="skill-item" onclick="openSkillModal('LangChain')">
-                    <i class="fas fa-link skill-icon"></i>
-                    <p>LangChain</p>
-                </div>
-                <div class="skill-item" onclick="openSkillModal('RAG')">
-                    <i class="fas fa-share-alt skill-icon"></i>
-                    <p>RAG</p>
-                </div>
-                <div class="skill-item" onclick="openSkillModal('AWS')">
-                    <i class="fas fa-cloud skill-icon"></i>
-                    <p>AWS</p>
-                </div>
-                <div class="skill-item" onclick="openSkillModal('Node.js')">
-                    <i class="fas fa-server skill-icon"></i>
-                    <p>Node.js</p>
-                </div>
-                <div class="skill-item" onclick="openSkillModal('PostgreSQL')">
-                    <i class="fas fa-database skill-icon"></i>
-                    <p>PostgreSQL</p>
-                </div>
-                <div class="skill-item" onclick="openSkillModal('Api')">
-                    <i class="fas fa-lock skill-icon"></i>
-                    <p>API Security</p>
-                </div>
-                <div class="skill-item" onclick="openSkillModal('Socket.io')">
-                    <i class="fas fa-bolt skill-icon"></i>
-                    <p>Socket.io</p>
-                </div>
-                <div class="skill-item" onclick="openSkillModal('Data')">
-                    <i class="fas fa-chart-line skill-icon"></i>
-                    <p>Data Analysis</p>
-                </div>
-                <div class="skill-item" onclick="openSkillModal('FastAPI')">
-                    <i class="fas fa-mobile-alt skill-icon"></i>
-                    <p>FastAPI</p>
+            </div>
+            <div class="tech-loop-wrapper">
+                <div class="tech-loop" id="techLoop">
+                    <div class="tech-loop-track">
+                        <!-- One sequence (will be duplicated in JS) -->
+                        <div class="tech-loop-item" title="Java">
+                            <i class="devicon-java-plain"></i>
+                        </div>
+                        <div class="tech-loop-item" title="Spring Boot">
+                            <i class="devicon-spring-plain"></i>
+                        </div>
+                        <div class="tech-loop-item" title="JavaScript">
+                            <i class="devicon-javascript-plain"></i>
+                        </div>
+                        <div class="tech-loop-item" title="Node.js">
+                            <i class="devicon-nodejs-plain"></i>
+                        </div>
+                        <div class="tech-loop-item" title="Prisma">
+                            <i class="devicon-prisma-original"></i>
+                        </div>
+                        <div class="tech-loop-item" title="TypeScript">
+                            <i class="devicon-typescript-plain"></i>
+                        </div>
+                        <div class="tech-loop-item" title="Next.js">
+                            <i class="devicon-nextjs-original"></i>
+                        </div>
+                        <div class="tech-loop-item" title="Python">
+                            <i class="devicon-python-plain"></i>
+                        </div>
+                        <div class="tech-loop-item" title="Flask">
+                            <i class="devicon-flask-original"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -876,12 +1547,6 @@
             </div>
         </div>
     </section>
-    <div id="skill-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeSkillModal()">&times;</span>
-            <div id="skillContent"></div>
-        </div>
-    </div>
     <section id="recommendations" class="section">
         <div class="container">
             <h2 class="section-title">Recommendations</h2>
@@ -971,92 +1636,7 @@
     </section>
 
     <script>
-        // Experience data
-        const experiences = {
-            bitlearns: {
-                title: "Bitlearns",
-                role: "Full Stack Engineer",
-                period: "July 2024 - November 2024",
-                details: [
-                    "In July 2024, I embarked on a pioneering project to harmonize AI with the latest technologies, including Node.js, APIs, PostgreSQL, AWS, and TypeScript. I crafted responsive UI interfaces with React, meticulously optimizing DOM manipulation to ensure seamless user interactions. Additionally, I implemented real- time user feedback mechanisms, effortlessly keeping users informed throughout their experience. On the AI front, I created sophisticated models using Python, TensorFlow, and PostgreSQL to provide personalized feedback, generate multi- modal content, and autonomously generate passwords. Furthermore, I leveraged Socket.io and APIs to deliver real-time notifications to teachers whenever students signed up, allowing for effortless tracking and management.The culmination of these efforts resulted in a remarkable 34 % increase in user experience and engagement, subsequently enhancing the overall value proposition. I'm grateful to have been part of the team"
-                ]
-            },
-            meshAi: {
-                title: "Mesh AI",
-                role: "Data Engineer",
-                period: "August 2024 - November 2024",
-                details: [
-                    "In August 2024, I developed a scheduling query system that leveraged advanced algorithms and AI frameworks to analyze database queries and enhance processing efficiency and accuracy. This system, built using Python, AWS Lambda, EC2, FastAPI, LangChain, AI, and PostgreSQL, brought about a slew of impressive achievements. I developed SQL query generation mechanisms using Seq2SQL and Text-to-SQL models, increasing data retrieval accuracy by 30%. Utilizing LangChain for natural language processing and Llama-Index for data indexing, I simplified user data retrieval and ensured accurate responses. Additionally, I designed a robust SQL query validation module and an improved read-only SQL agent for multi-table querying and safe data processing. The result was a system that allowed a unqiue way for users to interact with databases, and I'm proud to have played a part in its development."
-                ]
-            },
-            preeminentTech: {
-                title: "Preeminent Technology Inc",
-                role: "Backend Engineer",
-                period: "August 2024 – October 2024",
-                details: [
-                    "In August 2024, I had the privilege of architecting scalable backend systems using .Net 8, C, Azure, and Node.js, enabled AI-driven automation for flight and hotel bookings. The thrill of engineering RESTful APIs with advanced query management, seamlessly integrating with Enterprise APIs, still resonates with me. And, of course, the moment when automated AI/LLM training with CSP, Genetic Algorithms, and MILP successfully improved accuracy by 45%! I helped develop and integrate Viator API endpoints, crafting a backend architecture that handled data with precision. I'm grateful for the experience."
-                ]
-            },
-            rapyd: {
-                title: "RAPYD LinX",
-                role: "Software Engineer",
-                period: "May 2024 - August 2024",
-                details: [
-                    "In May 2024, I revolutionized data management and decision-making through innovative solutions. I developed complex SQL queries to generate reports for the sales team, enhancing decision-making and strategic planning efficiency by 40%. I also streamlined client data organization by 90% through a user-friendly JavaFX interface, empowering swift and accurate data retrieval, update, and management. Furthermore, I automated the end-to-end sales processing workflow using Python and Playwright, increasing productivity by 5x and reducing processing times from 5 minutes to just 1 minute. Through these achievements, I have to thank the RAPYD Linx teams for the experience."
-                ]
-            },
-            rocscience: {
-                title: "Rocscience",
-                role: "Software QA Developer",
-                period: "May 2023 - August 2023",
-                details: [
-                    "In May 2023, I spearheaded the development of a Python-based organizational algorithm that transformed the diagnostic logging process for geotechnical designs. This innovation streamlined line count consistency across diverse formats, reducing batch engine unit testing time from days to mere hours. My efforts led to a 60% boost in diagnostic data accuracy by addressing issues like missing information and extraneous headers, enhancing the quality and reliability of the logs. Additionally, I implemented an automated verification and comparison tool that enabled rapid, precise analysis across various application builds, accelerating testing efficiency by 80% and significantly enhancing our data validation processes."
-                ]
-            },
-
-            weBots: {
-                title: "Western WE-BOTS",
-                role: "Firmware Engineer",
-                period: "November 2022 - January 2024",
-                details: [
-                    "In this project, I restructured the telemetry architecture, integrating a CAN bus communication system with ROS to enable seamless data exchange between Arduino and ESP32 microcontrollers. I developed firmware in C++ for the ICM20948 sensor to capture accurate acceleration and rotation data on the life-size robot. To enhance operational insight, I created a 3D visual display that dynamically illustrates the robot’s acceleration and direction. Additionally, I designed and implemented a Python-based telemetry system using MQTT, enabling real-time remote monitoring and control. This setup significantly improved performance, delivering reliable, on-demand status updates and control capabilities."
-                ]
-            }
-        };
-
-        // Modal functionality
-        function openModal(company) {
-            const modal = document.getElementById('modal');
-            const modalContent = document.getElementById('modalContent');
-            const experience = experiences[company];
-
-            modalContent.innerHTML = `
-        <h3>${experience.title}</h3>
-        <div class="company-details">
-            <p>${experience.role}</p>
-            <p>${experience.period}</p>
-        </div>
-        <ul>
-            ${experience.details.map(detail => `<li>${detail}</li>`).join('')}
-        </ul>
-    `;
-
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('modal');
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        window.onclick = function (event) {
-            const modal = document.getElementById('modal');
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
+        /* ================= Intersection Observer (unchanged) ================= */
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -1067,116 +1647,349 @@
             });
         });
 
-        document.querySelectorAll('.experience-card, .skill-item, .project-card').forEach((el) => {
+        document.querySelectorAll(
+            '.skills-group, .project-card, .recommendation-card'
+        ).forEach((el) => {
             el.style.opacity = 0;
             el.style.transform = 'translateY(20px)';
             el.style.transition = 'all 0.6s ease-out';
             observer.observe(el);
         });
-        //Skills
-        const skillsData = {
-            Python: [
-                "Developed AI models at Bitlearns using TensorFlow for personalized feedback and multi-modal content generation, which led to a 34% boost in user engagement by dynamically adjusting content to user performance.",
-                "Implemented diagnostic algorithms at Rocscience to automate testing for geotechnical data, reducing batch testing from days to hours and increasing diagnostic accuracy by 60%.",
-                "Engineered a SQL query generation system at Mesh AI using Seq2SQL and NLP techniques, automating natural language query transformations to SQL. This innovation improved data retrieval accuracy by 30% and made data more accessible to non-technical users."
-            ],
-            JavaScript: [
-                "Developed a highly interactive UI for Bitlearns with React, focusing on responsive design and optimized DOM manipulation, leading to improved user engagement and smooth navigation through learning modules.",
-                "Designed an integrated interface for RAPYD LinX using JavaScript and JavaFX, enabling real-time interactions with sales data. This streamlined data entry and improved client interaction efficiency, boosting data organization by 90%."
-            ],
-            TypeScript: [
-                "Enhanced project maintainability at Bitlearns by integrating TypeScript, adding type safety to Node.js and frontend codebases. This reduced runtime errors by 20% and improved team productivity with more predictable and bug-free code.",
-                "Used TypeScript in AI Chatbot project to build a robust, scalable backend and frontend, facilitating real-time query handling with strict type checks. Improved system reliability and reduced debug time, enabling faster, smoother feature deployment."
-            ],
-            "React.js": [
-                "Built user-friendly interfaces at Bitlearns using React, implementing dynamic loading and efficient state management, which ensured smooth transitions across components and enhanced user experience across devices."
-            ],
-            SQL: [
-                "Crafted advanced SQL queries at RAPYD LinX, improving data-driven decision-making efficiency by 40% and enabling the sales team to quickly access real-time insights.",
-                "Implemented a custom SQL query system at Mesh AI, integrating PostgreSQL with AI-driven query generation models like Seq2SQL to convert natural language inputs into accurate SQL queries. Enhanced data retrieval capabilities led to more intuitive user access, improving query precision and response time.",
-                "Designed complex multi-table SQL queries at Mesh AI, incorporating query validation layers to enhance security and prevent data mishandling. These structured queries supported data indexing and optimized database interactions, delivering a 30% improvement in query efficiency."
-            ],
-            "Node.js": [
-                "Developed scalable backends with Node.js at Bitlearns, integrating AI models to dynamically personalize user experiences. Enhanced server-side API performance for rapid data processing, ensuring low latency and high scalability.",
-                "Architected backend services at Preeminent Technology, leveraging Node.js for real-time data handling in AI-enhanced flight and hotel booking systems, with a focus on efficient pipeline orchestration and seamless integration with external booking APIs."
-            ],
-            "AWS": [
-                "Designed a scalable scheduling query system at Mesh AI with AWS Lambda, EC2, and FastAPI, leveraging cloud resources to handle large-scale data processing demands while balancing loads. This setup ensured processing efficiency, reduced latency, and cut operational costs by dynamically adjusting resources based on demand.",
-                "Integrated AWS Lambda and EC2 for Bitlearns, managing server capacity in real time to meet fluctuating user demands and minimize downtime. This setup reduced response times during peak hours, creating a robust infrastructure capable of supporting thousands of concurrent users.",
-                "Utilized AWS S3 and RDS for secure data storage at Bitlearns, implementing redundancy and automated backup solutions. Integrated AWS IAM for robust role-based access control, protecting sensitive data while allowing quick, reliable data access across applications."
-            ],
-            Git: [
-                "Utilized Git for version control, managing branches, pull requests, and code reviews across all projects. Ensured smooth collaboration and code stability by maintaining an organized workflow and preventing conflicts through regular merge practices."
-            ],
-            "LLM Models": [
-                "Implemented LLMs to power conversational flows for an interactive chatbot, allowing context-aware and precise response handling. Enabled users to interact with real-time data queries, enhancing conversational depth and user satisfaction."
-            ],
-            Java: [
-                "Employed Java in RAPYD LinX to create intuitive JavaFX interfaces, improving client data interactions and achieving a 90% enhancement in data organization. Built secure backend logic for efficient data handling and user-friendly updates."
-            ],
-            TensorFlow: [
-                "Used TensorFlow at Bitlearns to design adaptive learning models, delivering personalized educational content. This approach resulted in a significant boost in user retention and satisfaction by adjusting content based on user interactions."
-            ],
-            PyTorch: [
-                "Built NLP models in PyTorch for chatbot development, ensuring real-time accuracy and contextually relevant responses. Integrated model-switching techniques to adapt conversations dynamically, boosting response accuracy and user satisfaction."
-            ],
-            LangChain: [
-                "Utilized LangChain at Mesh AI to automate natural language query processing and implement Llama-Index for data indexing, ensuring faster, more accurate query responses. LangChain enabled seamless natural language processing, allowing users to interact with complex data queries in an intuitive format, which improved response relevance and reduced retrieval times significantly.",
-                "Developed advanced NLP processing pipelines using LangChain in Mesh AI, enhancing the accessibility of SQL data by allowing non-technical users to retrieve complex information using natural language. This improvement made data querying intuitive, which streamlined data interactions and resulted in increased user adoption."
-            ],
-            RAG: [
-                "Integrated Retrieval-Augmented Generation (RAG) in chatbot interactions at Mesh AI, combining live data retrieval with generative responses to ensure contextually relevant and up-to-date answers. This system allowed users to obtain accurate, data-backed responses in real-time, improving user experience by providing dynamically generated, context-specific interactions.",
-                "Employed RAG to enhance chatbot precision at Mesh AI, combining data-driven retrievals with generative outputs, allowing users to engage with live database insights. This enabled a more interactive and informative experience, with chatbot responses tailored to specific queries based on real-time data updates."
-            ],
-            PostgreSQL: [
-                "Designed and managed PostgreSQL databases for high-frequency user interactions at Bitlearns, handling real-time data storage and retrieval with minimal latency. Implemented rigorous data integrity checks and efficient indexing, which supported scalable data management and enabled robust data-driven functionalities.",
-                "Engineered multi-table PostgreSQL systems in Mesh AI, optimized for complex data transactions and tailored for efficient natural language SQL query handling. This enabled real-time scheduling and streamlined data analysis, making backend operations faster and more reliable."
-            ],
-            Api: [
-                "Built secure RESTful API services at Preeminent Technology, integrating third-party booking APIs with real-time synchronization to provide accurate data exchange. Optimized endpoint performance for scalable, high-speed transactions, ensuring reliable data consistency."
-            ],
-            "Socket.io": [
-                "Implemented real-time notification services using Socket.io at Bitlearns, facilitating instant updates for educators regarding student sign-ups and engagement. This system allowed teachers to monitor user activity in real-time, improving student-teacher interactions."
-            ],
-            Data: [
-                "Designed automated data pipelines for RAPYD LinX, reducing sales data processing time by 5x. Structured data workflows for efficient storage and retrieval, streamlining data handling and providing quick access for strategic decision-making."
-            ],
-            FastAPI: [
-                "Integrated FastAPI in Mesh AI's scheduling systems with AWS Lambda, enhancing scalability for high-frequency scheduling requests and optimizing request processing speed. Implemented secure endpoint management to ensure data privacy and quick response handling."
-            ]
 
+        /* ================= Folder + Stack References ================= */
 
+        const folderSection = document.getElementById('experience-folder');
+        const folderToggle = document.getElementById('folder-toggle');
+        const experiencePanel = document.getElementById('experience-panel');
+        const experienceSection = document.getElementById('experience');
+        const folderSub = document.getElementById('folder-sub');
+
+        const stack = document.getElementById('experience-stack');
+        const cards = [...stack.querySelectorAll('.scroll-stack-card')];
+        const endMarker = stack.querySelector('.scroll-stack-end');
+
+        /* ================= Stack Config ================= */
+
+        const STACK = {
+            stackStart: 0.2,
+            scaleEnd: 0.1,
+            baseScale: 0.85,
+            scaleStep: 0.03,
+            gap: 30
         };
-        function openSkillModal(skill) {
-            const modal = document.getElementById('skill-modal');
-            const skillContent = document.getElementById('skillContent');
-            skillContent.innerHTML = `<h3>${skill}</h3><ul>${skillsData[skill].map(detail => `<li>${detail}</li>`).join('')}</ul>`;
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
+
+        /* ================= Stack State ================= */
+
+        let stackEnabled = false;
+        let stackData = [];
+        let ticking = false;
+
+        const clamp01 = v => Math.min(1, Math.max(0, v));
+
+        /* ================= Measure (ONCE) ================= */
+
+        function measureStack() {
+            const vh = window.innerHeight;
+            const endTop = endMarker.getBoundingClientRect().top + window.scrollY;
+
+            stackData = cards.map((card, i) => {
+                const top = card.getBoundingClientRect().top + window.scrollY;
+                return {
+                    card,
+                    i,
+                    start: top - vh * STACK.stackStart - i * STACK.gap,
+                    end: top - vh * STACK.scaleEnd,
+                    pin: endTop - vh / 2
+                };
+            });
         }
 
-        function closeSkillModal() {
-            document.getElementById('skill-modal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-        window.onclick = function (event) {
-            const modal = document.getElementById('skill-modal');
-            if (event.target == modal) {
-                closeSkillModal();
+        /* ================= Update (PURE MATH) ================= */
+
+        function updateStack() {
+            const y = window.scrollY;
+
+            for (const d of stackData) {
+                const p = clamp01((y - d.start) / (d.end - d.start));
+                const scale =
+                    1 - p * (1 - (STACK.baseScale + d.i * STACK.scaleStep));
+
+                let ty = 0;
+                if (y > d.start && y < d.pin) ty = y - d.start;
+                else if (y >= d.pin) ty = d.pin - d.start;
+
+                d.card.style.transform =
+                    `translate3d(0, ${ty}px, 0) scale(${scale})`;
             }
-        };
+        }
+
+        /* ================= RAF Scroll ================= */
+
+        function onScroll() {
+            if (!stackEnabled || ticking) return;
+            ticking = true;
+            requestAnimationFrame(() => {
+                updateStack();
+                ticking = false;
+            });
+        }
+
+        /* ================= Open / Close Experience ================= */
+
+        function setExperienceOpen(isOpen, options = {}) {
+            folderSection.classList.toggle('open', isOpen);
+            experiencePanel.classList.toggle('open', isOpen);
+            experienceSection.classList.toggle('open', isOpen);
+            folderToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+
+            if (folderSub) {
+                folderSub.textContent = isOpen ? 'Scroll to explore' : 'Click to open';
+            }
+
+            if (isOpen && options.scroll) {
+                setTimeout(() => {
+                    const top =
+                        experiencePanel.getBoundingClientRect().top +
+                        window.scrollY - 40;
+                    window.scrollTo({ top, behavior: 'smooth' });
+                }, 120);
+            }
+
+            if (isOpen) {
+                // Phase 2: cards eject from folder
+                experiencePanel.classList.add('ejecting');
+
+                setTimeout(() => {
+                    experiencePanel.classList.remove('ejecting');
+
+                    // Phase 3: enable scroll stack
+                    stackEnabled = true;
+                    measureStack();
+                    updateStack();
+                }, 600); // slightly longer than eject animation
+            } else {
+                stackEnabled = false;
+                cards.forEach(c => (c.style.transform = ''));
+            }
+        }
+
+        /* ================= Events ================= */
+
+        folderToggle.addEventListener('click', () => {
+            const open = experiencePanel.classList.contains('open');
+            setExperienceOpen(!open, { scroll: !open });
+        });
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', () => stackEnabled && measureStack());
+
+        /* ================= Nav Scroll ================= */
+
+        window.addEventListener('scroll', () => {
+            document.querySelector('.nav')
+                .classList.toggle('scrolled', window.scrollY > 100);
+        });
+
+        /* ================= Contact Reset ================= */
+
         function clearForm() {
-            setTimeout(function () {
+            setTimeout(() => {
                 document.getElementById('contactForm').reset();
             }, 100);
         }
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('.nav');
-            if (window.scrollY > 100) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
+        const ROTATING_TEXTS = [
+            'Software Engineer',
+            'Full-Stack Engineer',
+            'Backend Engineer',
+            'One Engineer'
+        ];
+
+        const rotatingRoot = document.getElementById('rotating-text');
+
+        const ROTATION_INTERVAL = 3000;
+        const STAGGER_DURATION = 25;
+        const SPRING_EASE = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
+
+        let currentIndex = 0;
+        let currentNodes = [];
+        let isAnimating = false;
+
+        function splitCharacters(text) {
+            if (window.Intl && Intl.Segmenter) {
+                const segmenter = new Intl.Segmenter('en', { granularity: 'grapheme' });
+                return Array.from(segmenter.segment(text), s => s.segment);
             }
+            return Array.from(text);
+        }
+
+        function clearWithExit(onComplete) {
+            if (!currentNodes.length) {
+                onComplete();
+                return;
+            }
+
+            currentNodes.forEach((node, i) => {
+                const delay = i * STAGGER_DURATION;
+                node.style.transition =
+                    `transform 0.45s ${SPRING_EASE} ${delay}ms, opacity 0.3s ease ${delay}ms`;
+                node.style.transform = 'translateY(-120%)';
+                node.style.opacity = '0';
+            });
+
+            const totalExitTime =
+                450 + currentNodes.length * STAGGER_DURATION;
+
+            setTimeout(() => {
+                rotatingRoot.innerHTML = '';
+                currentNodes = [];
+                onComplete();
+            }, totalExitTime);
+        }
+
+        function renderEnter(text) {
+            const words = text.split(' ');
+            let charIndex = 0;
+
+            words.forEach((word, wIdx) => {
+                const wordSpan = document.createElement('span');
+                wordSpan.className = 'text-rotate-word';
+
+                splitCharacters(word).forEach(char => {
+                    const charSpan = document.createElement('span');
+                    charSpan.className = 'text-rotate-element';
+                    charSpan.textContent = char;
+
+                    const delay = charIndex * STAGGER_DURATION;
+                    charSpan.style.transition =
+                        `transform 0.55s ${SPRING_EASE} ${delay}ms, opacity 0.35s ease ${delay}ms`;
+
+                    wordSpan.appendChild(charSpan);
+                    currentNodes.push(charSpan);
+                    charIndex++;
+                });
+
+                rotatingRoot.appendChild(wordSpan);
+
+                if (wIdx !== words.length - 1) {
+                    const space = document.createElement('span');
+                    space.className = 'text-rotate-space';
+                    space.textContent = ' ';
+                    rotatingRoot.appendChild(space);
+                }
+            });
+
+            // force layout
+            rotatingRoot.getBoundingClientRect();
+
+            currentNodes.forEach(node => {
+                node.style.transform = 'translateY(0)';
+                node.style.opacity = '1';
+            });
+        }
+
+        function rotateText() {
+            if (isAnimating) return;
+            isAnimating = true;
+
+            clearWithExit(() => {
+                renderEnter(ROTATING_TEXTS[currentIndex]);
+                currentIndex = (currentIndex + 1) % ROTATING_TEXTS.length;
+                isAnimating = false;
+            });
+        }
+
+        // initial render
+        renderEnter(ROTATING_TEXTS[currentIndex++]);
+
+        // interval
+        setInterval(rotateText, ROTATION_INTERVAL);
+
+        const pillNav = document.getElementById('pillNav');
+        const pillIndicator = pillNav.querySelector('.pill-indicator');
+        const pillLinks = pillNav.querySelectorAll('.pill-link');
+
+        function movePill(target) {
+            const rect = target.getBoundingClientRect();
+            const parentRect = pillNav.getBoundingClientRect();
+
+            const x = rect.left - parentRect.left;
+            const width = rect.width;
+
+            pillIndicator.style.width = `${width}px`;
+            pillIndicator.style.transform = `translateX(${x}px)`;
+
+            // 🔥 text color fix
+            pillLinks.forEach(link => link.classList.remove('is-active'));
+            target.classList.add('is-active');
+        }
+
+        // hover behavior
+        pillLinks.forEach(link => {
+            link.addEventListener('mouseenter', () => movePill(link));
+        });
+
+        // set active based on scroll
+        function setActivePill() {
+            let active = pillLinks[0];
+
+            pillLinks.forEach(link => {
+                const section = document.querySelector(link.getAttribute('href'));
+                if (!section) return;
+
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= 120 && rect.bottom > 120) {
+                    active = link;
+                }
+            });
+
+            movePill(active);
+        }
+
+        // init
+        window.addEventListener('load', setActivePill);
+        window.addEventListener('resize', setActivePill);
+        window.addEventListener('scroll', setActivePill);
+
+        const loop = document.getElementById('techLoop');
+        const track = loop.querySelector('.tech-loop-track');
+
+        let offset = 0;
+        let speed = 60; // px/sec
+        let isHovered = false;
+        let lastTime = null;
+
+        // duplicate content for infinite loop
+        function duplicateTrack() {
+            const contentWidth = track.scrollWidth;
+            while (track.scrollWidth < loop.offsetWidth * 2) {
+                track.innerHTML += track.innerHTML;
+            }
+        }
+        duplicateTrack();
+
+        function animate(time) {
+            if (!lastTime) lastTime = time;
+            const delta = (time - lastTime) / 1000;
+            lastTime = time;
+
+            const targetSpeed = isHovered ? 20 : speed;
+            offset += targetSpeed * delta;
+
+            const resetPoint = track.scrollWidth / 2;
+            if (offset >= resetPoint) offset = 0;
+
+            track.style.transform = `translate3d(${-offset}px, 0, 0)`;
+            requestAnimationFrame(animate);
+        }
+
+        requestAnimationFrame(animate);
+
+        // hover slow-down
+        loop.addEventListener('mouseenter', () => {
+            isHovered = true;
+        });
+        loop.addEventListener('mouseleave', () => {
+            isHovered = false;
         });
     </script>
 </body>
