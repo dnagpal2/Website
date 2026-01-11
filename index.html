@@ -167,6 +167,7 @@
             padding-top: calc(15px + env(safe-area-inset-top));
             padding-left: calc(30px + env(safe-area-inset-left));
             padding-right: calc(30px + env(safe-area-inset-right));
+            padding-bottom: 12px;
             background: rgba(10, 25, 47, 0.85);
             backdrop-filter: blur(10px);
             z-index: 1000;
@@ -674,6 +675,14 @@
             text-decoration: underline;
         }
 
+        .project-info .tech-stack {
+            color: var(--secondary);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            margin-top: 10px;
+            display: block;
+        }
+
         .contact {
             text-align: center;
             max-width: 600px;
@@ -1048,6 +1057,7 @@
             .nav {
                 padding: 10px 15px;
                 padding-top: calc(10px + env(safe-area-inset-top));
+                padding-bottom: 10px;
             }
 
             .nav-links {
@@ -1075,6 +1085,16 @@
             .nav {
                 padding: 8px 10px;
                 padding-top: calc(8px + env(safe-area-inset-top));
+                padding-bottom: 10px;
+            }
+
+            .nav-links {
+                gap: 10px;
+                flex-direction: row;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
             }
 
             .nav-links a {
@@ -1401,7 +1421,7 @@
         </ul>
     </nav>
     <div class="mobile-sidebar" id="mobileSidebar">
-        <button class="close-sidebar" aria-label="Close menu">×</button>
+        <button class="close-sidebar" aria-label="Close menu"></button>
 
         <a href="#experience">Experience</a>
         <a href="#skills">Skills</a>
@@ -1642,11 +1662,21 @@
             <h2 class="section-title">Projects</h2>
             <div class="projects-grid">
                 <div class="project-card">
+                    <img src="images/trailerVaultpng.png" alt="Trailer Vault" class="project-image">
+                    <div class="project-info">
+                        <h3>Trailer Vault</h3>
+                        <p>Trailer discovery platform where users can list, follow, and message each other.</p>
+                        <a href="https://trailer-vault.vercel.app/" target="_blank">View Project</a>
+                        <p class="tech-stack">Tech: Java, Spring Boot, JavaScript, React.js, WebSockets, SockJS</p>
+                    </div>
+                </div>
+                <div class="project-card">
                     <img src="images/finance.png" alt="Finance Tracker/Stock Predictor" class="project-image">
                     <div class="project-info">
                         <h3>Finance WebApp</h3>
                         <p>Finance Tracker and Stock Predictor using hugging transformers, Node.js and JS</p>
                         <a href="https://financetracker-eohh.onrender.com/" target="_blank">View Project</a>
+                        <p class="tech-stack">Tech: Node.js, JavaScript, Transformers</p>
                     </div>
                 </div>
                 <div class="project-card">
@@ -1655,6 +1685,7 @@
                         <h3>AI Chatbot</h3>
                         <p>Interactive chatbot using LLMs, Node.js, and Streamlit</p>
                         <a href="https://chat-bot-dnagpal.streamlit.app/" target="_blank">View Project</a>
+                        <p class="tech-stack">Tech: Node.js, LLMs, Streamlit</p>
                     </div>
                 </div>
                 <div class="project-card">
@@ -1664,6 +1695,7 @@
                         <p>Interactive pathfinding visualization tool</p>
                         <a href="https://dnagpal2.github.io/Path-Finder--Maze-Generator/" target="_blank">View
                             Project</a>
+                        <p class="tech-stack">Tech: JavaScript, Algorithms, HTML, CSS</p>
                     </div>
                 </div>
             </div>
