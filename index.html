@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#e8edf3">
   <meta name="description" content="Devraj Nagpal is a software engineer building reliable full-stack and AI-powered products.">
   <meta property="og:title" content="Devraj Nagpal - Software Engineer">
@@ -18,13 +18,15 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="images/jobloop-logo.webp" as="image" type="image/webp">
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Instrument+Sans:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
-  <link rel="stylesheet" href="styles.css?v=20260714l">
+  <link rel="stylesheet" href="styles.css?v=20260714m">
   <link rel="stylesheet" href="ui-refinement.css?v=20260714n">
-  <link rel="stylesheet" href="dark-mode.css?v=20260714n">
+  <link rel="stylesheet" href="dark-mode.css?v=20260714o">
+  <link rel="stylesheet" href="mobile.css?v=20260714a">
 </head>
 <body>
   <a class="skip-link" href="#portfolioContent">Skip to portfolio</a>
@@ -39,7 +41,7 @@
       <div class="back-wall">
         <div class="wall-label"><span></span><time id="wallClock">Toronto, --:--</time></div>
         <div class="wall-display jobloop-wall" role="img" aria-label="JobLoop logo displayed on the office wall">
-          <div class="jobloop-wall-mark"><img src="images/JobLoopLogo.png" alt=""><strong>JobLoop</strong></div>
+          <div class="jobloop-wall-mark"><img src="images/jobloop-logo.webp" alt="" decoding="async"><strong>JobLoop</strong></div>
           <span>Track applications. Prep smarter. Get hired.</span>
         </div>
         <div class="wall-shelf shelf-one"><i></i><i></i><i></i></div>
@@ -75,7 +77,7 @@
           <div class="login-screen">
             <time class="login-time" id="loginClock">--:--</time>
             <div class="login-user">
-              <img src="images/startup_founder.png" alt="">
+              <img src="images/profile-devraj.webp" alt="" decoding="async">
               <div>
                 <strong>Devraj Nagpal</strong>
                 <span>Software Engineer</span>
@@ -125,7 +127,7 @@
           <div class="address-bar"><i class="fa-solid fa-sliders" aria-hidden="true"></i><span id="addressText">devraj.dev/about</span><i class="fa-regular fa-star" aria-hidden="true"></i></div>
           <button class="icon-button theme-toggle" id="themeToggle" type="button" title="Use dark mode" aria-label="Use dark mode" aria-pressed="false"><i class="fa-regular fa-moon" id="themeIcon" aria-hidden="true"></i></button>
           <a class="icon-button" href="https://github.com/dnagpal2" target="_blank" rel="noopener noreferrer" title="GitHub" aria-label="Open GitHub"><i class="fa-brands fa-github"></i></a>
-          <button class="profile-chip" type="button" data-view-link="contact" aria-label="Open contact page"><img src="images/startup_founder.png" alt=""><span>DN</span></button>
+          <button class="profile-chip" type="button" data-view-link="contact" aria-label="Open contact page"><img src="images/profile-devraj.webp" alt="" decoding="async"><span>DN</span></button>
         </div>
       </header>
 
@@ -144,6 +146,6 @@
   <noscript>
     <div class="noscript">This portfolio needs JavaScript to run its browser-style navigation.</div>
   </noscript>
-  <script src="app.js?v=20260714n"></script>
+  <script src="app.js?v=20260714o"></script>
 </body>
 </html>

@@ -12,8 +12,8 @@ const experiences = [
 ];
 
 const projects = [
-  { title: 'JobLoop', image: 'images/JobLoopLogo.png', url: 'https://www.jobloop.ca/', description: 'A focused job-search workspace for tracking applications, organizing progress, and preparing smarter for interviews.', tech: 'Full-stack product · 2026', category: 'featured', featured: true },
-  { title: 'Trailer Vault', image: 'images/trailerVaultpng.png', url: 'https://trailer-vault.vercel.app/', description: 'A social trailer discovery platform where people can list, follow, and message each other in real time.', tech: 'Java · Spring Boot · React · WebSockets', category: 'fullstack' },
+  { title: 'JobLoop', image: 'images/jobloop-logo.webp', url: 'https://www.jobloop.ca/', description: 'A focused job-search workspace for tracking applications, organizing progress, and preparing smarter for interviews.', tech: 'Full-stack product · 2026', category: 'featured', featured: true },
+  { title: 'Trailer Vault', image: 'images/trailer-vault.webp', url: 'https://trailer-vault.vercel.app/', description: 'A social trailer discovery platform where people can list, follow, and message each other in real time.', tech: 'Java · Spring Boot · React · WebSockets', category: 'fullstack' },
   { title: 'Finance WebApp', image: 'images/finance.png', url: 'https://financetracker-eohh.onrender.com/', description: 'A finance tracker and stock-prediction workspace built around approachable market intelligence.', tech: 'Node.js · JavaScript · Transformers', category: 'ai' },
   { title: 'AI Chatbot', image: 'images/ai_chatbot.png', url: 'https://chat-bot-dnagpal.streamlit.app/', description: 'An interactive LLM chatbot experience with a streamlined conversational interface.', tech: 'LLMs · Node.js · Streamlit', category: 'ai' },
   { title: 'Path Finder', image: 'images/path_finder.png', url: 'https://dnagpal2.github.io/Path-Finder--Maze-Generator/', description: 'An interactive pathfinding and maze-generation visualizer for exploring classic algorithms.', tech: 'JavaScript · Algorithms · HTML · CSS', category: 'frontend' }
@@ -161,7 +161,7 @@ function aboutView() {
       <div class="page-spine" aria-hidden="true"><span>DN</span><strong>01</strong></div>
       <section class="about-intro">
         <div class="about-presence">
-          <img src="images/startup_founder.png" alt="Devraj Nagpal">
+          <img src="images/profile-devraj.webp" alt="Devraj Nagpal" decoding="async">
           <div><span class="presence-dot"></span><strong>Software engineer</strong><small>Toronto, Canada</small></div>
         </div>
         <p class="page-eyebrow">Portfolio / 2026</p>
@@ -175,7 +175,7 @@ function aboutView() {
       <aside class="profile-board">
         <div class="board-label"><span>Now building</span><span>01 / JobLoop</span></div>
         <div class="jobloop-lockup">
-          <img src="images/JobLoopLogo.png" alt="JobLoop">
+          <img src="images/jobloop-logo.webp" alt="JobLoop" decoding="async">
           <strong>JobLoop</strong>
         </div>
         <h2>A calmer way to run a job search.</h2>
@@ -246,7 +246,7 @@ function projectsView() {
     return `
       <article class="project-card ${project.featured ? 'is-featured jobloop' : ''}">
         <a class="project-visual" href="${project.url}" target="_blank" rel="noopener noreferrer" aria-label="Open ${project.title}">
-          <img src="${project.image}" alt="${project.featured ? `${project.title} logo` : `${project.title} project preview`}">
+          <img src="${project.image}" alt="${project.featured ? `${project.title} logo` : `${project.title} project preview`}" loading="lazy" decoding="async">
           <span class="project-watermark" aria-hidden="true">${String(projectIndex + 1).padStart(2, '0')}</span>
         </a>
         <div class="project-body">
@@ -288,7 +288,7 @@ function recommendationsView() {
 function linkedinView() {
   const roles = experiences.map((item) => `
     <article class="linkedin-role">
-      <img src="${item.logo}" alt="${item.company} logo">
+      <img src="${item.logo}" alt="${item.company} logo" loading="lazy" decoding="async">
       <div class="linkedin-role-copy">
         <h3>${item.role}</h3>
         <p><strong>${item.company}</strong> · ${item.employment}</p>
@@ -304,9 +304,9 @@ function linkedinView() {
       <div class="page-spine" aria-hidden="true"><span>DN</span><strong>06</strong></div>
       <div class="linkedin-profile-shell" aria-label="LinkedIn profile preview">
         <section class="linkedin-profile-card">
-          <div class="linkedin-cover"><img src="images/western-engineering-cover.jpg" alt="Amit Chakma Engineering Building at Western University"></div>
+          <div class="linkedin-cover"><img src="images/western-engineering-cover.webp" alt="Amit Chakma Engineering Building at Western University" loading="lazy" decoding="async"></div>
           <div class="linkedin-profile-body">
-            <img class="linkedin-avatar" src="images/startup_founder.png" alt="Devraj Nagpal">
+            <img class="linkedin-avatar" src="images/profile-devraj.webp" alt="Devraj Nagpal" loading="lazy" decoding="async">
             <div class="linkedin-summary">
               <h1>Devraj Nagpal <span class="linkedin-verified" title="Verified profile"><i class="fa-solid fa-check"></i></span></h1>
               <p>SWE I @ WSP | Prev SWE Intern @ WSP & Rocscience | Software Engineering @ Western University</p>

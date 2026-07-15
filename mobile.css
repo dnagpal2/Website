@@ -1,0 +1,909 @@
+/* Phone and small-tablet layout. Loaded after the theme layers so geometry stays
+   consistent in light and dark mode. */
+
+@keyframes personWalkPhone {
+  from { transform: translateX(-32vw) scale(.78); }
+  to { transform: translateX(43vw) scale(.78); }
+}
+
+@keyframes personSitPhone {
+  from { transform: translateX(43vw) scale(.78); }
+  to { transform: translateX(43.5vw) translateY(60px) rotate(-7deg) scale(.78); }
+}
+
+@keyframes personWalkSmallPhone {
+  from { transform: translateX(-40vw) scale(.66); }
+  to { transform: translateX(38vw) scale(.66); }
+}
+
+@keyframes personSitSmallPhone {
+  from { transform: translateX(38vw) scale(.66); }
+  to { transform: translateX(39vw) translateY(50px) rotate(-7deg) scale(.66); }
+}
+
+@keyframes personWalkLandscapePhone {
+  from { transform: translateX(-22vw) scale(.58); }
+  to { transform: translateX(46vw) scale(.58); }
+}
+
+@keyframes personSitLandscapePhone {
+  from { transform: translateX(46vw) scale(.58); }
+  to { transform: translateX(46.5vw) translateY(38px) rotate(-7deg) scale(.58); }
+}
+
+@media (max-width: 820px) {
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+    overscroll-behavior: none;
+  }
+
+  .cinematic,
+  .portfolio-app {
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  .cinematic-skip {
+    top: max(12px, env(safe-area-inset-top));
+    right: max(12px, env(safe-area-inset-right));
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .room-scene {
+    transform-origin: 56% 58%;
+  }
+
+  .back-wall {
+    inset: 7svh 0 23svh;
+  }
+
+  .wall-label {
+    top: 1.8svh;
+    left: 18px;
+    font-size: 9px;
+  }
+
+  .wall-display.jobloop-wall {
+    top: 5svh;
+    left: 18px;
+    width: calc(100% - 54px);
+    height: 36svh;
+    min-height: 210px;
+    border-width: 6px;
+  }
+
+  .jobloop-wall::after {
+    display: none;
+  }
+
+  .jobloop-wall-mark {
+    gap: 12px;
+  }
+
+  .jobloop-wall-mark img {
+    width: 58px;
+    height: 52px;
+  }
+
+  .jobloop-wall-mark strong {
+    font-size: 40px;
+  }
+
+  .jobloop-wall > span {
+    max-width: 82%;
+    font-size: 13px;
+    line-height: 1.45;
+    text-align: center;
+  }
+
+  .side-window {
+    width: 10vw;
+    border-left-width: 6px;
+  }
+
+  .desk-shadow {
+    left: 26%;
+    width: 72vw;
+  }
+
+  .desk {
+    left: 25%;
+    bottom: 10svh;
+    transform: scale(.72);
+    transform-origin: bottom left;
+  }
+
+  .office-chair {
+    left: 48%;
+    bottom: 6svh;
+    transform: translateX(-50%) scale(.88);
+    transform-origin: bottom center;
+  }
+
+  .character {
+    bottom: 12svh;
+    transform: translateX(-32vw) scale(.78);
+  }
+
+  .room-scene.is-running .character {
+    animation-name: personWalkPhone;
+  }
+
+  .room-scene.is-sitting .character {
+    animation-name: personSitPhone;
+  }
+
+  .room-scene.is-pov {
+    transform: scale(2.35) translate(-8%, 11%);
+  }
+
+  .pov-wall::after {
+    left: 6vw;
+    top: 5svh;
+    width: 64px;
+    height: 56px;
+  }
+
+  .pov-laptop {
+    top: 49%;
+    width: 92vw;
+    height: 56svh;
+    min-height: 340px;
+    max-height: 520px;
+  }
+
+  .pov-arm {
+    bottom: -17svh;
+    width: 34vw;
+    height: 50svh;
+  }
+
+  .browser-window {
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+  }
+
+  .browser-tabs-row {
+    height: calc(46px + env(safe-area-inset-top));
+    padding: calc(4px + env(safe-area-inset-top)) max(5px, env(safe-area-inset-right)) 0 max(5px, env(safe-area-inset-left));
+    gap: 4px;
+  }
+
+  .browser-tabs {
+    scroll-padding-inline: 6px;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .browser-tab {
+    height: 42px;
+    min-height: 42px;
+    scroll-snap-align: start;
+  }
+
+  .replay-button {
+    width: 42px;
+    height: 42px;
+    margin-bottom: 0;
+  }
+
+  .browser-toolbar {
+    height: 46px;
+    padding: 3px max(8px, env(safe-area-inset-right)) 3px max(8px, env(safe-area-inset-left));
+    gap: 6px;
+  }
+
+  .browser-toolbar .icon-button,
+  .profile-chip {
+    width: 40px;
+    height: 40px;
+    min-height: 40px;
+  }
+
+  .address-bar {
+    height: 38px;
+    min-width: 80px;
+  }
+
+  .browser-page {
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .browser-statusbar {
+    min-height: calc(26px + env(safe-area-inset-bottom));
+    padding-right: max(10px, env(safe-area-inset-right));
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: max(10px, env(safe-area-inset-left));
+  }
+
+  .content-shell,
+  .content-shell.compact,
+  .career-page,
+  .linkedin-page {
+    width: min(calc(100% - 36px), 720px);
+    padding-top: 42px;
+    padding-bottom: calc(64px + env(safe-area-inset-bottom));
+  }
+
+  .filter-chip,
+  .career-nav-item,
+  .signal-selectors button,
+  .linkedin-profile-actions a,
+  .linkedin-open-to a,
+  .contact-option,
+  .contact-submit,
+  .action-button,
+  .text-action,
+  .board-link,
+  .project-link {
+    min-height: 44px;
+  }
+
+  .career-switcher,
+  .career-arc,
+  .filter-row {
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .career-switcher::-webkit-scrollbar,
+  .career-arc::-webkit-scrollbar,
+  .filter-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .project-visual,
+  .project-card:nth-child(even) .project-visual {
+    aspect-ratio: 16 / 10;
+    min-height: 0;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 560px) {
+  .wall-display.jobloop-wall {
+    top: 6svh;
+    width: calc(100% - 48px);
+    height: 32svh;
+    min-height: 184px;
+  }
+
+  .jobloop-wall-mark img {
+    width: 48px;
+    height: 44px;
+  }
+
+  .jobloop-wall-mark strong {
+    font-size: 34px;
+  }
+
+  .desk {
+    left: 8%;
+    bottom: 8svh;
+    transform: scale(.58);
+  }
+
+  .office-chair {
+    left: 48%;
+    bottom: 4svh;
+    transform: translateX(-50%) scale(.74);
+  }
+
+  .character {
+    bottom: 10svh;
+    transform: translateX(-40vw) scale(.66);
+  }
+
+  .room-scene.is-running .character {
+    animation-name: personWalkSmallPhone;
+  }
+
+  .room-scene.is-sitting .character {
+    animation-name: personSitSmallPhone;
+  }
+
+  .pov-laptop {
+    top: 50%;
+    width: 96vw;
+    height: 50svh;
+    min-height: 315px;
+  }
+
+  .pov-lid {
+    padding: 8px;
+    border-radius: 10px 10px 4px 4px;
+  }
+
+  .login-time {
+    margin-bottom: 10px;
+    font-size: 32px;
+  }
+
+  .login-user {
+    gap: 9px;
+  }
+
+  .login-user img {
+    width: 42px;
+    height: 42px;
+  }
+
+  .login-user strong {
+    font-size: 14px;
+  }
+
+  .login-user span,
+  .login-message {
+    font-size: 9px;
+  }
+
+  .password-field {
+    width: min(240px, 78%);
+    height: 36px;
+    margin-top: 12px;
+  }
+
+  .login-screen::before {
+    width: 60px;
+    height: 52px;
+  }
+
+  .pov-keyboard {
+    padding-top: 16px;
+  }
+
+  .pov-arm {
+    bottom: -19svh;
+    width: 38vw;
+    height: 46svh;
+  }
+
+  .browser-tabs-row {
+    padding-top: calc(2px + env(safe-area-inset-top));
+  }
+
+  .browser-tab {
+    height: 42px;
+    padding: 0 12px;
+  }
+
+  .browser-tab span {
+    font-size: 11px;
+  }
+
+  .browser-toolbar {
+    height: 46px;
+  }
+
+  .toolbar-actions,
+  .browser-toolbar > a.icon-button {
+    display: none;
+  }
+
+  .browser-toolbar > .theme-toggle {
+    display: grid;
+    width: 40px;
+    height: 40px;
+  }
+
+  .address-bar {
+    height: 38px;
+    padding: 0 11px;
+    font-size: 10px;
+  }
+
+  .profile-chip {
+    display: flex;
+    padding: 4px;
+  }
+
+  .profile-chip img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .browser-statusbar > span:first-child {
+    max-width: 52vw;
+  }
+
+  .content-shell,
+  .content-shell.compact,
+  .career-page,
+  .linkedin-page {
+    width: calc(100% - 30px);
+    padding-top: 32px;
+  }
+
+  .page-title,
+  .contact-heading .page-title,
+  .signals-heading .page-title {
+    font-size: 36px;
+    line-height: 1.08;
+  }
+
+  .page-eyebrow {
+    margin-bottom: 16px;
+  }
+
+  .about-name {
+    font-size: 52px;
+    line-height: .92;
+  }
+
+  .about-intro {
+    padding-bottom: 36px;
+  }
+
+  .about-presence {
+    margin-bottom: 24px;
+  }
+
+  .about-lede {
+    font-size: 17px;
+    line-height: 1.55;
+  }
+
+  .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .action-button,
+  .text-action {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .profile-board {
+    padding: 22px 20px;
+  }
+
+  .jobloop-lockup {
+    margin-top: 30px;
+  }
+
+  .profile-board h2 {
+    font-size: 30px;
+  }
+
+  .about-proof article {
+    grid-template-columns: 38px minmax(0, 1fr);
+    padding: 22px 0;
+  }
+
+  .career-heading {
+    gap: 16px;
+  }
+
+  .career-summary {
+    font-size: 14px;
+  }
+
+  .experience-workspace {
+    gap: 22px;
+    margin-top: 24px;
+  }
+
+  .career-nav-item {
+    flex-basis: 176px;
+    min-height: 72px;
+  }
+
+  .spotlight-header {
+    gap: 10px;
+    padding: 14px 16px;
+  }
+
+  .spotlight-company img {
+    width: 42px;
+    height: 42px;
+  }
+
+  .spotlight-story {
+    padding: 26px 18px;
+  }
+
+  .spotlight-number {
+    display: none;
+  }
+
+  .spotlight-story h2 {
+    padding-right: 0;
+    font-size: 30px;
+  }
+
+  .spotlight-summary {
+    margin-top: 14px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .focus-list div {
+    min-height: 0;
+    padding: 14px 0;
+  }
+
+  .spotlight-stack {
+    margin-top: 22px;
+  }
+
+  .role-context > div {
+    grid-template-columns: 64px minmax(0, 1fr);
+  }
+
+  .filter-row {
+    margin-right: -15px;
+    padding-right: 15px;
+    scroll-snap-type: x proximity;
+  }
+
+  .filter-chip {
+    scroll-snap-align: start;
+  }
+
+  .projects-grid {
+    margin-top: 24px;
+  }
+
+  .project-visual,
+  .project-card:nth-child(even) .project-visual {
+    min-height: 0;
+  }
+
+  .project-body,
+  .project-card:nth-child(even) .project-body {
+    padding: 24px 0 34px;
+  }
+
+  .project-body h2 {
+    font-size: 30px;
+  }
+
+  .project-link {
+    align-items: center;
+    padding-top: 12px;
+  }
+
+  .skill-marquee {
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+
+  .tech-tile {
+    width: 116px;
+    height: 44px;
+    padding: 0 12px;
+  }
+
+  .tech-tile span {
+    font-size: 10px;
+  }
+
+  .skill-group {
+    padding: 22px 0;
+  }
+
+  .practice-notes header,
+  .practice-notes > div {
+    padding: 22px 18px;
+  }
+
+  .signals-stage {
+    padding: 24px 18px 0;
+  }
+
+  .signals-stage blockquote {
+    margin-top: 36px;
+    font-size: 27px;
+    line-height: 1.18;
+  }
+
+  .signal-selectors button {
+    padding: 14px 0;
+  }
+
+  .linkedin-profile-shell {
+    padding: 0;
+    background: transparent;
+  }
+
+  .linkedin-cover {
+    height: 132px;
+  }
+
+  .linkedin-profile-body {
+    gap: 20px;
+    padding: 68px 16px 22px;
+  }
+
+  .linkedin-avatar {
+    top: -50px;
+    left: 16px;
+    width: 100px;
+    height: 100px;
+  }
+
+  .linkedin-summary h1 {
+    align-items: flex-start;
+    font-size: 23px;
+    line-height: 1.2;
+  }
+
+  .linkedin-summary > p {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .linkedin-network {
+    flex-wrap: wrap;
+  }
+
+  .linkedin-profile-actions a {
+    min-height: 40px;
+  }
+
+  .linkedin-affiliations {
+    gap: 10px;
+  }
+
+  .linkedin-open-to {
+    margin: 0 16px 18px;
+    padding: 16px;
+  }
+
+  .linkedin-layout {
+    gap: 8px;
+    padding-top: 8px;
+  }
+
+  .linkedin-section {
+    padding: 20px 16px;
+  }
+
+  .linkedin-role {
+    grid-template-columns: 42px minmax(0, 1fr);
+    padding: 17px 0;
+  }
+
+  .linkedin-role-copy {
+    min-width: 0;
+  }
+
+  .linkedin-role h3,
+  .linkedin-role p,
+  .linkedin-role span,
+  .linkedin-role small,
+  .linkedin-role em {
+    overflow-wrap: anywhere;
+  }
+
+  .contact-heading {
+    max-width: 100%;
+  }
+
+  .contact-email {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    font-size: 14px;
+  }
+
+  .contact-panel,
+  .contact-form {
+    padding: 22px 18px;
+  }
+
+  .contact-panel-copy h2,
+  .contact-form-header h2 {
+    font-size: 30px;
+  }
+
+  .contact-option {
+    gap: 10px;
+  }
+
+  .contact-location {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .contact-location span {
+    grid-column: 1 / -1;
+  }
+
+  .contact-submit {
+    width: 100%;
+  }
+}
+
+@media (max-width: 390px) {
+  .wall-display.jobloop-wall {
+    left: 14px;
+    width: calc(100% - 40px);
+    min-height: 170px;
+  }
+
+  .jobloop-wall-mark strong {
+    font-size: 30px;
+  }
+
+  .jobloop-wall > span {
+    font-size: 11px;
+  }
+
+  .browser-tab {
+    padding: 0 10px;
+  }
+
+  .address-bar i:last-child {
+    display: none;
+  }
+
+  .content-shell,
+  .content-shell.compact,
+  .career-page,
+  .linkedin-page {
+    width: calc(100% - 24px);
+  }
+
+  .page-title,
+  .contact-heading .page-title,
+  .signals-heading .page-title {
+    font-size: 32px;
+  }
+
+  .about-name {
+    font-size: 46px;
+  }
+
+  .profile-board {
+    padding: 20px 16px;
+  }
+
+  .spotlight-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .role-track {
+    max-width: 100%;
+    text-align: left;
+  }
+
+  .spotlight-story h2 {
+    font-size: 27px;
+  }
+
+  .signals-stage blockquote {
+    font-size: 24px;
+  }
+
+  .linkedin-profile-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr 40px;
+  }
+
+  .linkedin-profile-actions a {
+    padding: 0 10px;
+  }
+
+  .linkedin-profile-actions .linkedin-more-action {
+    width: 40px;
+  }
+
+  .linkedin-section {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 560px) and (max-width: 950px) {
+  .wall-label {
+    top: 2svh;
+  }
+
+  .wall-display.jobloop-wall {
+    top: 5svh;
+    left: 5vw;
+    width: 60vw;
+    height: 52svh;
+    min-height: 0;
+  }
+
+  .jobloop-wall-mark img {
+    width: 48px;
+    height: 42px;
+  }
+
+  .jobloop-wall-mark strong {
+    font-size: 32px;
+  }
+
+  .desk {
+    left: 45%;
+    bottom: 4svh;
+    transform: scale(.55);
+  }
+
+  .office-chair {
+    left: 57%;
+    bottom: 1svh;
+    transform: translateX(-50%) scale(.62);
+  }
+
+  .character {
+    bottom: 2svh;
+    transform: translateX(-22vw) scale(.58);
+  }
+
+  .room-scene.is-running .character {
+    animation-name: personWalkLandscapePhone;
+  }
+
+  .room-scene.is-sitting .character {
+    animation-name: personSitLandscapePhone;
+  }
+
+  .pov-laptop {
+    top: 52%;
+    width: min(72vw, 680px);
+    height: 80svh;
+    min-height: 0;
+  }
+
+  .pov-arm {
+    bottom: -34svh;
+    width: 25vw;
+    height: 68svh;
+  }
+
+  .login-time {
+    margin-bottom: 6px;
+    font-size: 26px;
+  }
+
+  .login-user img {
+    width: 36px;
+    height: 36px;
+  }
+
+  .password-field {
+    height: 32px;
+    margin-top: 8px;
+  }
+
+  .login-message {
+    margin-top: 4px;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .project-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .project-link:hover,
+  .board-link:hover,
+  .contact-email:hover {
+    text-decoration: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .career-switcher,
+  .career-arc,
+  .filter-row,
+  .browser-tabs {
+    scroll-behavior: auto;
+  }
+}

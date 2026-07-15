@@ -352,6 +352,18 @@
   background: #1d2623;
 }
 
+:root[data-theme="dark"] .role-context > div:nth-child(1) {
+  background: #18252d;
+}
+
+:root[data-theme="dark"] .role-context > div:nth-child(2) {
+  background: #192822;
+}
+
+:root[data-theme="dark"] .role-context > div:nth-child(3) {
+  background: #2b211f;
+}
+
 :root[data-theme="dark"] .role-context > div + div {
   border-color: var(--studio-line);
 }
@@ -360,8 +372,20 @@
   color: #8f9c97;
 }
 
+:root[data-theme="dark"] .role-context > div:nth-child(1) dt {
+  color: #91b6cf;
+}
+
+:root[data-theme="dark"] .role-context > div:nth-child(2) dt {
+  color: #94bea7;
+}
+
+:root[data-theme="dark"] .role-context > div:nth-child(3) dt {
+  color: #d2a097;
+}
+
 :root[data-theme="dark"] .role-context dd {
-  color: #e7eeeb;
+  color: #f0f4f2;
 }
 
 :root[data-theme="dark"] .filter-row,
