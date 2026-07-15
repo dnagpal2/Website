@@ -1,0 +1,580 @@
+.theme-toggle {
+  transition: color .2s ease, background-color .2s ease, transform .2s ease;
+}
+
+.theme-toggle:active {
+  transform: scale(.94);
+}
+
+.browser-toolbar > .theme-toggle {
+  display: grid;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ink: #eef3f1;
+  --muted: #9aa8a3;
+  --line: #34413d;
+  --paper: #151b19;
+  --mist: #1c2421;
+  --blue: #80a9ff;
+  --blue-dark: #a8c2ff;
+  --coral: #ff8169;
+  --amber: #f2c65f;
+  --green: #58b99c;
+  --studio-ink: #eef3f1;
+  --studio-muted: #9aa8a3;
+  --studio-canvas: #0d1211;
+  --studio-paper: #151b19;
+  --studio-soft: #1c2421;
+  --studio-line: #34413d;
+  --studio-blue: #80a9ff;
+  --studio-blue-soft: #1b2b42;
+  --studio-coral: #ff8169;
+  --studio-spruce: #58b99c;
+  --studio-yellow: #f2c65f;
+  --studio-shadow: 0 30px 90px rgba(0, 0, 0, .48);
+}
+
+:root[data-theme="dark"],
+:root[data-theme="dark"] body {
+  color: var(--studio-ink);
+  background: var(--studio-canvas);
+}
+
+:root[data-theme="dark"] .room-scene {
+  background: #141b1d;
+}
+
+:root[data-theme="dark"] .room-ceiling {
+  background: linear-gradient(180deg, #263033, #1b2427);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .28);
+}
+
+:root[data-theme="dark"] .back-wall {
+  background: linear-gradient(110deg, #222c2e 0 73%, #1a2427 73%);
+}
+
+:root[data-theme="dark"] .wall-display.jobloop-wall {
+  color: #dce5e2;
+  border-color: #394541;
+  background: #192220;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .34), 0 0 0 1px #46534e;
+}
+
+:root[data-theme="dark"] .jobloop-wall::after {
+  background: #33403c;
+}
+
+:root[data-theme="dark"] .jobloop-wall-mark strong {
+  color: #80a9ff;
+}
+
+:root[data-theme="dark"] .jobloop-wall > span {
+  color: #a9b7b2;
+}
+
+:root[data-theme="dark"] .wall-label {
+  color: #bdc9c5;
+}
+
+:root[data-theme="dark"] .wall-shelf {
+  background: #56645f;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, .36);
+}
+
+:root[data-theme="dark"] .side-window {
+  border-color: #394548;
+  background: linear-gradient(145deg, #243f4a, #172b32 58%, #294650);
+  box-shadow: -12px 0 30px rgba(0, 0, 0, .3);
+}
+
+:root[data-theme="dark"] .room-floor {
+  background: repeating-linear-gradient(90deg, rgba(166, 185, 179, .08) 0 1px, transparent 1px 12vw), linear-gradient(180deg, #313c3d, #202a2d);
+}
+
+:root[data-theme="dark"] .room-floor::after {
+  background: repeating-linear-gradient(0deg, rgba(166, 185, 179, .07) 0 1px, transparent 1px 11vh);
+}
+
+:root[data-theme="dark"] .pov-scene {
+  background: #172022;
+}
+
+:root[data-theme="dark"] .pov-wall {
+  background: linear-gradient(125deg, #273235, #1b272c 72%, #162126);
+  box-shadow: inset 0 -18px 40px rgba(0, 0, 0, .28);
+}
+
+:root[data-theme="dark"] .pov-desk {
+  background: linear-gradient(155deg, #334b51 0 35%, #22363c 35% 100%);
+}
+
+:root[data-theme="dark"] .pov-keyboard {
+  background: linear-gradient(180deg, #778489, #525f64);
+}
+
+:root[data-theme="dark"] .portfolio-app,
+:root[data-theme="dark"] .ambient-office {
+  background: var(--studio-canvas);
+}
+
+:root[data-theme="dark"] .ambient-office::before {
+  opacity: .075;
+  filter: grayscale(1) brightness(1.5);
+}
+
+:root[data-theme="dark"] .ambient-office::after {
+  background: linear-gradient(120deg, rgba(95, 119, 111, .12), transparent 42%);
+}
+
+:root[data-theme="dark"] .browser-window {
+  border-color: #44514d;
+  background: var(--studio-paper);
+  box-shadow: var(--studio-shadow);
+}
+
+:root[data-theme="dark"] .browser-chrome {
+  color: #d5ddda;
+  border-color: #36423e;
+  background: #202724;
+}
+
+:root[data-theme="dark"] .browser-tab {
+  color: #98a49f;
+}
+
+:root[data-theme="dark"] .browser-tab::after {
+  background: #3a4642;
+}
+
+:root[data-theme="dark"] .browser-tab i {
+  color: #89958f;
+}
+
+:root[data-theme="dark"] .browser-tab:hover {
+  color: #f0f4f2;
+  background: rgba(255, 255, 255, .055);
+}
+
+:root[data-theme="dark"] .browser-tab.is-active {
+  color: #f2f6f4;
+  background: var(--studio-paper);
+}
+
+:root[data-theme="dark"] .browser-tab.is-active i {
+  color: var(--studio-blue);
+}
+
+:root[data-theme="dark"] .browser-toolbar {
+  background: var(--studio-paper);
+}
+
+:root[data-theme="dark"] .icon-button {
+  color: #aab5b1;
+}
+
+:root[data-theme="dark"] .icon-button:hover,
+:root[data-theme="dark"] .theme-toggle {
+  color: #edf3f0;
+  background: #252e2b;
+}
+
+:root[data-theme="dark"] .icon-button:disabled:hover {
+  color: #aab5b1;
+  background: transparent;
+}
+
+:root[data-theme="dark"] .address-bar,
+:root[data-theme="dark"] .profile-chip {
+  color: #b4c0bb;
+  border-color: #35413d;
+  background: #202825;
+}
+
+:root[data-theme="dark"] .profile-chip span {
+  color: #d7dfdc;
+}
+
+:root[data-theme="dark"] .browser-page {
+  background: var(--studio-paper);
+  scrollbar-color: #53615c transparent;
+}
+
+:root[data-theme="dark"] .browser-statusbar {
+  color: #98a59f;
+  border-color: #34403c;
+  background: #1b2220;
+}
+
+:root[data-theme="dark"] .browser-statusbar strong {
+  color: #e0e7e4;
+}
+
+:root[data-theme="dark"] .page-spine {
+  color: #899792;
+}
+
+:root[data-theme="dark"] .page-title,
+:root[data-theme="dark"] .about-name,
+:root[data-theme="dark"] .about-presence strong {
+  color: var(--studio-ink);
+}
+
+:root[data-theme="dark"] .page-intro,
+:root[data-theme="dark"] .section-heading p,
+:root[data-theme="dark"] .about-presence small,
+:root[data-theme="dark"] .contact-intro {
+  color: var(--studio-muted);
+}
+
+:root[data-theme="dark"] .action-button {
+  color: #111715;
+  border-color: #edf3f0;
+  background: #edf3f0;
+}
+
+:root[data-theme="dark"] .action-button:hover {
+  border-color: #fff;
+  background: #fff;
+}
+
+:root[data-theme="dark"] .action-button.blue {
+  color: #0b1b32;
+  border-color: var(--studio-blue);
+  background: var(--studio-blue);
+}
+
+:root[data-theme="dark"] .text-action {
+  color: #e5ebe8;
+  border-color: #aab7b2;
+}
+
+:root[data-theme="dark"] .about-presence img {
+  border-color: #4b5954;
+}
+
+:root[data-theme="dark"] .about-lede {
+  color: #c3cdca;
+}
+
+:root[data-theme="dark"] .profile-board {
+  color: #eaf0ee;
+  background: #1a2b42;
+}
+
+:root[data-theme="dark"] .board-label,
+:root[data-theme="dark"] .profile-board > p,
+:root[data-theme="dark"] .project-facts dt {
+  color: #a9bad0;
+}
+
+:root[data-theme="dark"] .profile-board h2,
+:root[data-theme="dark"] .project-facts dd {
+  color: #eef3f1;
+}
+
+:root[data-theme="dark"] .project-facts,
+:root[data-theme="dark"] .project-facts div + div {
+  border-color: #405775;
+}
+
+:root[data-theme="dark"] .board-link {
+  color: #9dbaff;
+}
+
+:root[data-theme="dark"] .about-proof,
+:root[data-theme="dark"] .about-proof article + article {
+  border-color: var(--studio-line);
+}
+
+:root[data-theme="dark"] .about-proof p {
+  color: var(--studio-muted);
+}
+
+:root[data-theme="dark"] .career-summary,
+:root[data-theme="dark"] .career-arc {
+  color: var(--studio-muted);
+}
+
+:root[data-theme="dark"] .career-arc i,
+:root[data-theme="dark"] .switcher-label,
+:root[data-theme="dark"] .career-nav-item,
+:root[data-theme="dark"] .spotlight-header,
+:root[data-theme="dark"] .focus-list,
+:root[data-theme="dark"] .focus-list div + div {
+  border-color: var(--studio-line);
+}
+
+:root[data-theme="dark"] .switcher-label,
+:root[data-theme="dark"] .career-nav-item,
+:root[data-theme="dark"] .career-year,
+:root[data-theme="dark"] .spotlight-company span {
+  color: #92a09b;
+}
+
+:root[data-theme="dark"] .career-nav-item:hover,
+:root[data-theme="dark"] .career-nav-item.is-active,
+:root[data-theme="dark"] .spotlight-company strong,
+:root[data-theme="dark"] .focus-list strong {
+  color: #edf2f0;
+}
+
+:root[data-theme="dark"] .career-nav-item.is-active {
+  background: rgba(128, 169, 255, .06);
+}
+
+:root[data-theme="dark"] .career-nav-item img,
+:root[data-theme="dark"] .spotlight-company img {
+  border-color: #46524e;
+  background: #f7f8f8;
+}
+
+:root[data-theme="dark"] .spotlight-number {
+  color: #27312e;
+}
+
+:root[data-theme="dark"] .spotlight-summary {
+  color: #b2beb9;
+}
+
+:root[data-theme="dark"] .spotlight-stack > span {
+  color: #899690;
+}
+
+:root[data-theme="dark"] .tag {
+  color: #c0ccc7;
+  border-color: #586660;
+}
+
+:root[data-theme="dark"] .role-context {
+  color: #e8eeeb;
+  background: #1d2623;
+}
+
+:root[data-theme="dark"] .role-context > div + div {
+  border-color: var(--studio-line);
+}
+
+:root[data-theme="dark"] .role-context dt {
+  color: #8f9c97;
+}
+
+:root[data-theme="dark"] .role-context dd {
+  color: #e7eeeb;
+}
+
+:root[data-theme="dark"] .filter-row,
+:root[data-theme="dark"] .project-card {
+  border-color: var(--studio-line);
+}
+
+:root[data-theme="dark"] .filter-chip,
+:root[data-theme="dark"] .project-kicker,
+:root[data-theme="dark"] .project-meta {
+  color: #8f9d97;
+}
+
+:root[data-theme="dark"] .filter-chip:hover,
+:root[data-theme="dark"] .filter-chip.is-active,
+:root[data-theme="dark"] .project-body h2,
+:root[data-theme="dark"] .project-link {
+  color: #edf3f0;
+}
+
+:root[data-theme="dark"] .project-body p {
+  color: #abb7b2;
+}
+
+:root[data-theme="dark"] .project-visual {
+  background: #202a27;
+}
+
+:root[data-theme="dark"] .project-card.jobloop .project-visual {
+  background: #1b304f;
+}
+
+:root[data-theme="dark"] .project-card.jobloop .project-watermark {
+  color: rgba(128, 169, 255, .17);
+}
+
+:root[data-theme="dark"] .skill-marquee {
+  color: #edf3f0;
+  border-color: var(--studio-line);
+  background: #1a211f;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, .18);
+}
+
+:root[data-theme="dark"] .skill-marquee::before {
+  background: linear-gradient(90deg, #1a211f, rgba(26, 33, 31, 0));
+}
+
+:root[data-theme="dark"] .skill-marquee::after {
+  background: linear-gradient(-90deg, #1a211f, rgba(26, 33, 31, 0));
+}
+
+:root[data-theme="dark"] .tech-tile {
+  color: #edf3f0;
+  border-color: #3d4945;
+}
+
+:root[data-theme="dark"] .tech-tile i {
+  color: #8eb2ff;
+}
+
+:root[data-theme="dark"] .tech-tile span,
+:root[data-theme="dark"] .skill-group h2 {
+  color: #e8eeeb;
+}
+
+:root[data-theme="dark"] .skills-layout,
+:root[data-theme="dark"] .skill-group {
+  border-color: var(--studio-line);
+}
+
+:root[data-theme="dark"] .skill-group li {
+  color: #aab7b2;
+}
+
+:root[data-theme="dark"] .skill-group li:not(:last-child)::after {
+  color: #596660;
+}
+
+:root[data-theme="dark"] .practice-notes {
+  background: #194b41;
+}
+
+:root[data-theme="dark"] .signals-heading > p:last-child {
+  color: var(--studio-muted);
+}
+
+:root[data-theme="dark"] .signals-stage {
+  color: #e7eeeb;
+  background: #1c2421;
+}
+
+:root[data-theme="dark"] .signal-count,
+:root[data-theme="dark"] .signals-stage footer span,
+:root[data-theme="dark"] .signal-selectors button {
+  color: #95a39d;
+}
+
+:root[data-theme="dark"] .signal-count i {
+  background: #3e4a46;
+}
+
+:root[data-theme="dark"] .signal-selectors,
+:root[data-theme="dark"] .signal-selectors button + button {
+  border-color: #3e4a46;
+}
+
+:root[data-theme="dark"] .signals-stage blockquote,
+:root[data-theme="dark"] .signals-stage footer strong,
+:root[data-theme="dark"] .signal-selectors button:hover,
+:root[data-theme="dark"] .signal-selectors button.is-active {
+  color: #edf3f0;
+}
+
+:root[data-theme="dark"] .linkedin-page {
+  color: #e8eaed;
+}
+
+:root[data-theme="dark"] .linkedin-profile-shell {
+  --linkedin-shell: #0f1113;
+  --linkedin-surface: #1b1f23;
+  --linkedin-border: #30353a;
+  --linkedin-divider: #353a3f;
+  --linkedin-text: #f0f1f2;
+  --linkedin-body: #cbd0d4;
+  --linkedin-muted: #a9b0b5;
+  --linkedin-link: #69b7ff;
+  --linkedin-avatar-ring: #111518;
+  --linkedin-badge-text: #111518;
+  --linkedin-badge-bg: #dfe3e6;
+  --linkedin-primary-text: #0c2940;
+  --linkedin-primary-bg: #69b7ff;
+  --linkedin-more-text: #c8cdd1;
+  --linkedin-more-border: #899198;
+  --linkedin-open-bg: #374451;
+  --linkedin-open-label: #e6e8ea;
+  --linkedin-open-text: #fff;
+  --linkedin-open-muted: #bac0c5;
+  --linkedin-contact-link: #b7d9f7;
+}
+
+:root[data-theme="dark"] .contact-panel {
+  border-color: var(--studio-blue);
+  background: #1a2b42;
+}
+
+:root[data-theme="dark"] .contact-panel-copy > span,
+:root[data-theme="dark"] .contact-panel-copy p,
+:root[data-theme="dark"] .contact-option span,
+:root[data-theme="dark"] .contact-location span,
+:root[data-theme="dark"] .contact-location small {
+  color: #a9bad0;
+}
+
+:root[data-theme="dark"] .contact-panel-copy h2,
+:root[data-theme="dark"] .contact-option,
+:root[data-theme="dark"] .contact-option strong,
+:root[data-theme="dark"] .contact-location strong {
+  color: #edf3f1;
+}
+
+:root[data-theme="dark"] .contact-links,
+:root[data-theme="dark"] .contact-option {
+  border-color: #405775;
+}
+
+:root[data-theme="dark"] .contact-form {
+  background: #194b41;
+}
+
+:root[data-theme="dark"] .field input,
+:root[data-theme="dark"] .field textarea {
+  border-color: rgba(255, 255, 255, .3);
+  background: rgba(255, 255, 255, .07);
+}
+
+.portfolio-app,
+.browser-window,
+.browser-chrome,
+.browser-toolbar,
+.browser-page,
+.browser-statusbar,
+.profile-board,
+.signals-stage,
+.contact-panel,
+.contact-form,
+.skill-marquee,
+.linkedin-profile-shell,
+.linkedin-profile-card,
+.linkedin-layout,
+.linkedin-section,
+.linkedin-open-to {
+  transition: color .24s ease, background-color .24s ease, border-color .24s ease, box-shadow .24s ease;
+}
+
+@media (max-width: 560px) {
+  .browser-toolbar > .theme-toggle {
+    display: grid;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle,
+  .portfolio-app,
+  .browser-window,
+  .browser-chrome,
+  .browser-toolbar,
+  .browser-page,
+  .browser-statusbar,
+  .profile-board,
+  .signals-stage,
+  .contact-panel,
+  .contact-form,
+  .skill-marquee {
+    transition: none;
+  }
+}
