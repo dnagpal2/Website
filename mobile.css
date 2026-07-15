@@ -172,18 +172,35 @@
     height: calc(46px + env(safe-area-inset-top));
     padding: calc(4px + env(safe-area-inset-top)) max(5px, env(safe-area-inset-right)) 0 max(5px, env(safe-area-inset-left));
     gap: 4px;
+    min-width: 0;
+    overflow: hidden;
   }
 
   .browser-tabs {
+    flex: 1 1 auto;
+    width: 0;
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
     scroll-padding-inline: 6px;
     scroll-snap-type: x proximity;
+    overscroll-behavior-x: contain;
+    touch-action: pan-x;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .browser-tabs::-webkit-scrollbar {
+    display: none;
   }
 
   .browser-tab {
+    flex: 0 0 auto;
     height: 42px;
     min-height: 42px;
     scroll-snap-align: start;
+    scroll-snap-stop: normal;
   }
 
   .replay-button {
@@ -208,11 +225,27 @@
   .address-bar {
     height: 38px;
     min-width: 80px;
+    overflow: hidden;
   }
 
   .browser-page {
-    overscroll-behavior: contain;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
     -webkit-overflow-scrolling: touch;
+    scroll-padding-bottom: calc(80px + env(safe-area-inset-bottom));
+  }
+
+  .page-view {
+    width: 100%;
+    height: auto;
+    min-width: 0;
+    min-height: 100%;
+    overflow: visible;
   }
 
   .browser-statusbar {
@@ -227,6 +260,8 @@
   .career-page,
   .linkedin-page {
     width: min(calc(100% - 36px), 720px);
+    max-width: 100%;
+    min-width: 0;
     padding-top: 42px;
     padding-bottom: calc(64px + env(safe-area-inset-bottom));
   }
@@ -267,6 +302,41 @@
   .contact-form input,
   .contact-form textarea {
     font-size: 16px;
+  }
+
+  .page-view > *,
+  .about-page > *,
+  .career-heading > *,
+  .experience-workspace > *,
+  .spotlight-header > *,
+  .spotlight-company,
+  .spotlight-company > *,
+  .spotlight-story,
+  .focus-list > *,
+  .spotlight-stack > *,
+  .project-card > *,
+  .signals-page > *,
+  .signals-stage,
+  .linkedin-profile-body > *,
+  .linkedin-layout > *,
+  .contact-layout > * {
+    min-width: 0;
+  }
+
+  .page-view img {
+    max-width: 100%;
+  }
+
+  .career-summary,
+  .spotlight-summary,
+  .signals-stage blockquote,
+  .linkedin-summary,
+  .linkedin-summary > p,
+  .contact-intro,
+  .project-body,
+  .project-body p {
+    max-width: 100%;
+    overflow-wrap: anywhere;
   }
 }
 
@@ -483,11 +553,15 @@
   }
 
   .career-heading {
+    display: block;
     gap: 16px;
   }
 
   .career-summary {
+    width: 100%;
+    margin-top: 18px;
     font-size: 14px;
+    white-space: normal;
   }
 
   .experience-workspace {
@@ -500,9 +574,40 @@
     min-height: 72px;
   }
 
+  .career-switcher {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .experience-spotlight {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+  }
+
   .spotlight-header {
+    align-items: flex-start;
+    flex-direction: column;
     gap: 10px;
     padding: 14px 16px;
+  }
+
+  .spotlight-company {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .spotlight-company strong,
+  .role-track {
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .role-track {
+    text-align: left;
   }
 
   .spotlight-company img {
@@ -535,7 +640,23 @@
   }
 
   .spotlight-stack {
+    grid-template-columns: 1fr;
+    gap: 10px;
     margin-top: 22px;
+  }
+
+  .spotlight-stack > span {
+    padding-top: 0;
+  }
+
+  .tag-list,
+  .tag {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .tag {
+    overflow-wrap: anywhere;
   }
 
   .role-context > div {
@@ -600,17 +721,34 @@
   }
 
   .signals-stage {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
     padding: 24px 18px 0;
   }
 
   .signals-stage blockquote {
+    width: 100%;
+    max-width: 100%;
     margin-top: 36px;
+    margin-right: 0;
+    margin-left: 0;
     font-size: 27px;
     line-height: 1.18;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .signal-selectors {
+    width: 100%;
+    min-width: 0;
   }
 
   .signal-selectors button {
+    min-width: 0;
     padding: 14px 0;
+    white-space: normal;
+    overflow-wrap: anywhere;
   }
 
   .linkedin-profile-shell {
@@ -806,7 +944,218 @@
   }
 }
 
+@media (min-width: 821px) and (max-width: 960px) {
+  .browser-window {
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    border: 0;
+    border-radius: 0;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+  }
+
+  .window-controls,
+  .page-spine {
+    display: none;
+  }
+
+  .browser-tabs,
+  .browser-page,
+  .page-view,
+  .content-shell,
+  .content-shell.compact,
+  .career-page,
+  .linkedin-page {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .browser-tabs {
+    overflow-x: auto;
+  }
+
+  .browser-page {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .page-view {
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    overflow: visible;
+  }
+
+  .content-shell,
+  .content-shell.compact,
+  .career-page,
+  .linkedin-page {
+    width: min(calc(100% - 48px), 840px);
+    padding-top: 48px;
+    padding-bottom: 72px;
+  }
+
+  .about-page {
+    display: block;
+  }
+
+  .about-intro {
+    padding-bottom: 48px;
+  }
+
+  .profile-board {
+    min-height: 0;
+  }
+
+  .career-heading,
+  .signals-page,
+  .experience-workspace,
+  .linkedin-profile-body,
+  .linkedin-layout,
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .career-heading,
+  .signals-page {
+    gap: 24px;
+  }
+
+  .experience-workspace {
+    gap: 28px;
+  }
+
+  .career-switcher {
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .switcher-label {
+    flex: 0 0 120px;
+  }
+
+  .career-nav-item {
+    flex: 0 0 200px;
+  }
+
+  .project-card,
+  .project-card:nth-child(even) {
+    grid-template-columns: 1fr;
+  }
+
+  .project-visual,
+  .project-card:nth-child(even) .project-visual {
+    grid-row: 1;
+    grid-column: 1;
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+  }
+
+  .project-body,
+  .project-card:nth-child(even) .project-body {
+    grid-row: 2;
+    grid-column: 1;
+    min-height: 0;
+    padding: 32px 0 40px;
+  }
+
+  .linkedin-side-column {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .practice-notes {
+    grid-template-columns: 1fr;
+  }
+
+  .page-view > *,
+  .about-page > *,
+  .career-heading > *,
+  .experience-workspace > *,
+  .signals-page > *,
+  .linkedin-profile-body > *,
+  .linkedin-layout > *,
+  .contact-layout > *,
+  .project-card > * {
+    min-width: 0;
+    max-width: 100%;
+  }
+}
+
 @media (orientation: landscape) and (max-height: 560px) and (max-width: 950px) {
+  .browser-window {
+    inset: 0;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .page-spine {
+    display: none;
+  }
+
+  .browser-page {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .content-shell,
+  .content-shell.compact,
+  .career-page,
+  .linkedin-page {
+    width: calc(100% - 32px);
+    max-width: 100%;
+    min-width: 0;
+    padding-top: 30px;
+    padding-bottom: 56px;
+  }
+
+  .about-page {
+    display: block;
+  }
+
+  .career-heading,
+  .signals-page,
+  .experience-workspace,
+  .linkedin-profile-body,
+  .linkedin-layout,
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .career-switcher {
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .project-card,
+  .project-card:nth-child(even) {
+    grid-template-columns: 1fr;
+  }
+
+  .project-visual,
+  .project-card:nth-child(even) .project-visual {
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  .project-body,
+  .project-card:nth-child(even) .project-body {
+    grid-row: 2;
+    grid-column: 1;
+  }
+
   .wall-label {
     top: 2svh;
   }
